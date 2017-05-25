@@ -1,0 +1,79 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
+      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--<title>Node Authentication</title>-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+        .material-icons, .icon-text {
+      vertical-align: middle;
+    }
+    </style>
+</head>
+<body>
+    
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+
+                    <p>
+                        <!--<strong>id</strong>: <%= user._id %><br>-->
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">Nome</strong>: <%= user.nome %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">E-mail</strong>: <%= user.email %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">Endereço</strong>: <%= user.endereco %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">Cidade</strong>: <%= user.cidade %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <!--<strong>password</strong>: <%= user.password %>-->
+                        <strong class="vertical-align: middle">Estado</strong>: <%= user.estado %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">Pais</strong>: <%= user.pais %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">Telefone</strong>: <%= user.telefone %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">Celular</strong>: <%= user.celular %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">CPF</strong>: <%= user.CPF %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">RG</strong>: <%= user.RG %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">Data de Nascimento</strong>: <%= user.dataNasc %><br>
+                        <i class="small material-icons">insert_chart</i>
+                        <strong class="vertical-align: middle">Saldo</strong>: <%= user.saldo %><br>
+
+                    </p>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script>
+</body>
+</html>
