@@ -1,0 +1,19 @@
+{
+  "name": "prjnodeang",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "five-star-rating": "^1.0.0",
+    "ngSweetAlert": "angular-sweetalert#^1.1.2",
+    "angular-rating": "^3.1.0"
+  }
+}

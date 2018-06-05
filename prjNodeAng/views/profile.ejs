@@ -27,14 +27,23 @@
 </head>
 <body>
    
-<nav class="green lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+<nav class="orange darken-4" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="http://imgur.com/a/mG9js" >Hotéis.com</a>
+      
       <ul class="right hide-on-med-and-down">
+        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
+        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
+        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
+        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
         <li><a href="/logout" >Logout</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="/logout" style="font-size:18px">Logout</a></li>
+        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
+        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
+        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
+        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
+        <li><a href="/logout" >Logout</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -51,19 +60,11 @@
     
 <div class="container">
 
-    
-    
-
-    
-
         <!-- LOCAL INFORMATION -->
        
                 <h3><span class="fa fa-user"></span> <%= user.nome %></h3><br><br>
 
                     <p>
-                        <!--<strong>id</strong>: <%= user._id %><br>-->
-                        <!--<i class="material-icons">perm_identity</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">Nome</strong>: <%= user.nome %><br><br>-->
                         <i class="small material-icons">mail</i>
                         <strong class="vertical-align: middle" style="font-size:16px">E-mail</strong>: <%= user.email %><br><br>
                         <i class="small material-icons">picture_in_picture</i>
@@ -80,54 +81,37 @@
                         <i class="small material-icons">contact_phone</i>
                         <strong class="vertical-align: middle" style="font-size:16px">Celular</strong>: <%= user.celular %><br><br>
                         <i class="small material-icons">perm_identity</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">CPF</strong>: <%= user.CPF %><br><br>
+                        <strong class="vertical-align: middle" style="font-size:16px">CPF</strong>: <%= user.cpf %><br><br>
                         <i class="small material-icons">perm_identity</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">RG</strong>: <%= user.RG %><br><br>
+                        <strong class="vertical-align: middle" style="font-size:16px">RG</strong>: <%= user.rg %><br><br>
                         <i class="small material-icons">perm_identity</i>
                         <strong class="vertical-align: middle" style="font-size:16px">Data de Nascimento</strong>: <%= user.dataNasc %><br><br>
                         <i class="small material-icons">attach_money</i>
                         <strong class="vertical-align: middle" style="font-size:16px">Saldo</strong>: <%= user.saldo %><br><br><br>
-                        <h1 class="header orange-text">Minhas Reservas</h1><br><br>
-
-                        <strong class="vertical-align: middle" style="font-size:16px">Saldo</strong>: <%= user.quartos[0].tipo %><br><br>
-                        <strong class="vertical-align: middle" style="font-size:16px">Saldo</strong>: <%= user.quartos[0].nome %><br><br>
-                        <strong class="vertical-align: middle" style="font-size:16px">Saldo</strong>: <%= user.quartos[0].desc %><br><br>
-                        <strong class="vertical-align: middle" style="font-size:16px">Saldo</strong>: <%= user.quartos[0] %><br><br>
+                         <td><a class="waves-effect waves-light btn" href="/completarCadastro"><i class="material-icons right">send</i>Editar perfil</a></td>
                         
-                        <!--/*tentar usar o angular aqui pra fazer o repeater dos quartos */-->
-                    </p>
-
-      
-
     </div>
 
 
 
-<footer class="page-footer red">
+<footer class="page-footer deep-orange darken-4">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+          <h5 class="white-text">Sobre nós</h5>
+          <p class="grey-text text-lighten-4">Nós somos uma empresa que busca proporcionar o máximo de conforto possível para nossos usuários enquanto eles aproveitam suas viagens. Para tal, fazemos o possível para providenciar que eles consigam estadia para onde quer que vão.</p>
 
 
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
+          <h5 class="white-text">Links úteis</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
+            <li><a class="white-text" href="/adicionarReserva">Reserve um quarto</a></li>
+            <li><a class="white-text" href="/encerrarReserva">Encerrar suas reservas</a></li>
+            <li><a class="white-text" href="/profile">Perfil</a></li>
+            <li><a class="white-text" href="/adicionarquarto">Cadastre seu quarto</a></li>
           </ul>
         </div>
       </div>
@@ -143,6 +127,24 @@
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script>
+
+<script>
+  var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
+  
+  app.controller('reservaController', ['$scope', '$http', function ($scope, $http) {
+          $scope.quartos = [];
+
+          $scope.func  = function(){
+          $http.get('/users/profile').then(function(response)
+            {
+              $scope.quartos = response.data;
+            });   
+          }
+          
+        $scope.func();
+
+  }])
+</script>
 </body>
 
 

@@ -1,0 +1,203 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
+      <link rel="stylesheet" type="text/css" href="../node_modules/sweetalert/lib/sweet-alert.css">      
+      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--<title>Node Authentication</title>-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    
+    <style>
+        /*body        { padding-top:80px; word-wrap:break-word; }*/
+        .material-icons, .icon-text {
+      vertical-align: middle;
+    }
+        nav ul a{
+            font-size: 18px;
+        }
+        nav ul a:hover{
+            color:#fff;
+            text-decoration: none;
+        }
+        html{
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller='reservaController'>
+   
+<nav class="teal darken-2" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" >Hotéis.com</a>
+      <ul class="right hide-on-med-and-down">
+       <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
+        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
+        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
+        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
+        <li><a href="/logout" >Logout</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
+        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
+        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
+        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
+        <li><a href="/logout" >Logout</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      
+      <h1 class="header teal-text">Já está de saída?</h1>
+
+    </div>
+  </div>
+
+    
+<div class="container">
+    <section>
+    <h1 class="header teal-text">Minhas reservas em aberto</h1>
+  <table class='highlight-table'>
+  <tr>
+    <th>Título</th>
+    <th>Rua</th>
+    <th>Número</th>
+    <th>Cidade</th>
+    <th>Estado</th>
+    <th>Descrição</th>
+    <th>Data de entrada</th>
+    <th>Data de saída</th>
+    <th>Preço</th>
+    <th>Avaliar (0 à 5)</th>
+  </tr>
+  <tr ng-repeat="quarto in quartos">
+    <td>{{quarto.titulo}}</td>
+    <td>{{quarto.rua}}</td>
+    <td>{{quarto.numero}}</td>
+    <td>{{quarto.cidade}}</td>
+    <td>{{quarto.estado}}</td>
+    <td>{{quarto.desc}}</td>
+    <td>{{quarto.data_inicio}}</td>
+    <td>{{quarto.data_fim}}</td>
+    <td>{{quarto.preco | currency : "R$ "}}</td><td>
+    
+</td>
+            </div>
+        </div>
+    <td><a class="waves-effect waves-light btn" value='salvar' type='submit' ng-click="encerrar(quarto)"><i class="material-icons right">send</i>Encerrar</a></td>
+  </tr>
+</table></form>
+    </section>
+</div>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<footer class="page-footer teal darken-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Sobre nós</h5>
+          <p class="grey-text text-lighten-4">Nós somos uma empresa que busca proporcionar o máximo de conforto possível para nossos usuários enquanto eles aproveitam suas viagens. Para tal, fazemos o possível para providenciar que eles consigam estadia para onde quer que vão.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Links úteis</h5>
+          <ul>
+            <li><a class="white-text" href="/adicionarReserva">Reserve um quarto</a></li>
+            <li><a class="white-text" href="/encerrarReserva">Encerrar suas reservas</a></li>
+            <li><a class="white-text" href="/profile">Perfil</a></li>
+            <li><a class="white-text" href="/adicionarquarto">Cadastre seu quarto</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script>
+  <!--<script src="../public/javascripts/controller.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+  <script src="../node_modules/sweetalert/lib/sweet-alert.js"></script>
+  <script src="../node_modules/angular-sweetalert/SweetAlert.js"></script>
+  <script src="../bower_components/ngSweetalert/SweetAlert.min.js"></script>
+
+  <script>
+  var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
+  
+  app.controller('reservaController', ['$scope', '$http', function ($scope, $http) {
+          $scope.quartos = [];
+          $scope.func  = function(){
+          $http.get('/users/encerrarReserva').then(function(response)
+            {
+              $scope.quartos = response.data;
+            });   
+          }
+          $scope.encerrar = function(quarto){
+            swal({
+            title: "Encerrar sua reserva?",
+            text: "Isso não poderá ser desfeito e você terá que deixar seu quarto - Não se esqueça de avaliar sua estadia!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Confirmar",
+            closeOnConfirm: false}, 
+            function(){ 
+                var data = ({
+                    _id: quarto._id,
+                    titulo: $scope.titulo,
+                    rua: $scope.rua,
+                    numero: $scope.numero,
+                    cidade: $scope.cidade,
+                    estado: $scope.estado,
+                    preco: quarto.preco,
+                    data_inicio: $scope.data_inicio,
+                    data_fim: $scope.data_fim,
+                    
+                });
+
+            console.log($scope.starRating1);
+
+            $http.post('/users/encerrarReserva/', data).then(function (response) {
+                
+          }, function (response) {
+          console.log("erro");
+        });
+        swal("Sua reserva foi cancelada com sucesso!");
+        $scope.func();
+            }
+            );
+
+          }
+        $scope.func();
+
+  }])//script
+  
+  </script>
+
+</body>
+
+
+
+
+
+
+</html>

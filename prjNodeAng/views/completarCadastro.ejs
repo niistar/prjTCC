@@ -1,0 +1,247 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
+      <link rel="stylesheet" type="text/css" href="../node_modules/sweetalert/lib/sweet-alert.css">
+      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--<title>Node Authentication</title>-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        /*body        { padding-top:80px; word-wrap:break-word; }*/
+        .material-icons, .icon-text {
+      vertical-align: middle;
+    }
+        nav ul a{
+            font-size: 18px;
+        }
+        nav ul a:hover{
+            color:#fff;
+            text-decoration: none;
+        }
+        html{
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller='quartoController'>
+   
+<nav class="orange darken-4" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Hotéis.com</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
+        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
+        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
+        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
+        <li><a href="/logout" >Logout</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
+        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
+        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
+        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
+        <li><a href="/logout" >Logout</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      
+      <h1 class="header teal-text">Anuncie seu quarto!</h1>
+      <br>
+
+    </div>
+  </div>
+
+    
+<div class="container">
+  <form>
+    <div class='input-field col s6'>
+    <section>
+      <div>
+      <input type='text' ng-model='nome' id='nome' /><br><br>
+      <label for="nome">Nome</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='text' ng-model='sobrenome' id='sobrenome'/><br><br>
+      <label for="sobrenome">Sobrenome</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='text' ng-model='rua' id='rua'/><br><br>
+      <label for="rua">Rua</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='number' ng-model='numero' id='numero'/><br><br>
+      <label for="numero">Número</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='text' ng-model='cidade' id='cidade'/><br><br>
+      <label for="cidade">Cidade</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='text' ng-model='estado' id='estado'/><br><br>
+      <label for="estado">Estado</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='text' ng-model='pais' id='pais'/><br><br>
+      <label for="pais">País</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='number' ng-model='cep' id='cep'/><br><br>
+      <label for="cep">CEP</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='number' ng-model='cpf' id='cpf'/><br><br>
+      <label for="cpf">CPF</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='number' ng-model='rg' id='rg'/><br><br>
+      <label for="rg">RG</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='number' ng-model='telefone' id='telefone'/><br><br>
+      <label for="telefone">Telefone</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='number' ng-model='celular' id='celular'/><br><br>
+      <label for="celular">Celular</label>
+      </div>
+      <div class='input-field col s6'>
+      <input type='date' ng-model='dataNasc' id='dataNasc'/>Data de nascimento<br><br>
+      </div>
+      <div class='input-field col s6'>
+      <input type='number' ng-model='saldo' id='saldo'/><br><br>
+      <label for="saldo">Saldo</label>
+      </div>
+
+      <!--<input type='submit' value='salvar' ng-click="adicionarQuarto()"/>-->
+      <td><a class="waves-effect waves-light btn" value='salvar' type='submit' ng-click="completarCadastro()"><i class="material-icons right">send</i>Confirmar</a></td>
+      </form>
+    </section>
+</div>
+</div>
+
+
+
+<footer class="page-footer orange darken-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Sobre nós</h5>
+          <p class="grey-text text-lighten-4">Nós somos uma empresa que busca proporcionar o máximo de conforto possível para nossos usuários enquanto eles aproveitam suas viagens. Para tal, fazemos o possível para providenciar que eles consigam estadia para onde quer que vão.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Links úteis</h5>
+          <ul>
+            <li><a class="white-text" href="/adicionarReserva">Reserve um quarto</a></li>
+            <li><a class="white-text" href="/encerrarReserva">Encerrar suas reservas</a></li>
+            <li><a class="white-text" href="/profile">Perfil</a></li>
+            <li><a class="white-text" href="/adicionarquarto">Cadastre seu quarto</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script>
+  <!--<script src="../public/javascripts/controller.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+  <script src="../node_modules/sweetalert/lib/sweet-alert.js"></script>
+  <script src="../node_modules/angular-sweetalert/SweetAlert.js"></script>
+  <script src="../bower_components/ngSweetalert/SweetAlert.min.js"></script>
+
+  <script>
+  var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
+  
+  app.controller('quartoController', ['$scope', '$http', function ($scope, $http, $location) {
+          $scope.completarCadastro = function () {
+          $scope.perfil = [];
+
+            var data = ({
+                nome : $scope.nome,
+                sobrenome : $scope.sobrenome,
+                rua : $scope.rua,
+                numero : $scope.numero,
+                cidade : $scope.cidade,
+                estado : $scope.estado,
+                pais : $scope.pais,
+                email : $scope.email,
+                telefone : $scope.telefone,
+                celular : $scope.celular,
+                cpf : $scope.cpf,
+                cep : $scope.cep,
+                rg : $scope.rg,
+                dataNasc : $scope.dataNasc,
+                saldo : $scope.saldo
+            });
+            console.log(data);
+              
+
+          $http.post('users/completarCadastro', data).then(function (response) {
+          }, function (response) {
+          console.log("erro");
+
+          
+        });
+        swal("Cadastro atualizado com sucesso!");
+    };
+        $scope.func  = function(){
+          $http.get('/users/completarCadastro').then(function(response)
+            {
+                console.log(response.data);
+                $scope.perfil = response.data;
+                $scope.nome = $scope.perfil.nome,
+                $scope.sobrenome = $scope.perfil.sobrenome,
+                $scope.rua = $scope.perfil.rua,
+                $scope.numero = $scope.perfil.numero,
+                $scope.cidade = $scope.perfil.cidade,
+                $scope.estado = $scope.perfil.estado,
+                $scope.pais = $scope.perfil.pais,
+                $scope.email = $scope.perfil.email,
+                $scope.telefone = $scope.perfil.telefone,
+                $scope.celular = $scope.perfil.celular,
+                $scope.cpf = $scope.perfil.cpf,
+                $scope.cep = $scope.perfil.cep,
+                $scope.rg = $scope.perfil.rg,
+                $scope.dataNasc = $scope.perfil.datanasc,
+                $scope.saldo = $scope.perfil.saldo
+            });   
+          }
+          
+        $scope.func();
+
+
+  }])
+  
+  
+  </script>
+
+</body>
+
+
+
+
+
+
+</html>

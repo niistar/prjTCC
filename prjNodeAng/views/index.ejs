@@ -1,26 +1,154 @@
-<!-- views/index.ejs -->
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Starter Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
+      <link rel="stylesheet" type="text/css" href="../node_modules/sweetalert/lib/sweet-alert.css">
+      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--<title>Node Authentication</title>-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <style>
-        body        { padding-top:80px; }
+        /*body        { padding-top:80px; word-wrap:break-word; }*/
+        .material-icons, .icon-text {
+      vertical-align: middle;
+    }
+        nav ul a{
+            font-size: 18px;
+        }
+        nav ul a:hover{
+            color:#fff;
+            text-decoration: none;
+        }
+        html{
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        #download-button{
+
+        }
+        #download-button:hover{
+            color:#fff;
+            text-decoration: none;
+            font-size:12px;
+        }
+        
     </style>
 </head>
 <body>
-<div class="container">
+  <nav class="red darken-4" role="navigation">
+    <div class="nav-wrapper container"><ul><a id="logo-container" href="/" class="brand-logo">Hotéis.com</a></ul>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/login">Entrar</a></li>
+        <li><a href="/signup">Cadastre-se</a></li>
+      </ul>
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
-
-        <p>Login or Register with:</p>
-
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center red-text">Hotéis.com</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Vai viajar? Procure com a gente um lugar para ficar!</h5>
+      </div>
+      <div class="row center"><br><br>
+        <a href="/signup" id="download-button" class="btn-large waves-effect waves-light red darken-4">Cadastre-se já!</a>
+      </div>
+      <br><br>
 
-</div>
-</body>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+<br>
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center red-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">Fácil e rápido</h5>
+
+            <p class="light">Busque um quarto. Reserve um quarto. Tudo isso mais fácil do que você imagina.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center red-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">Anuncie seus quartos</h5>
+
+            <p class="light">Tem um cômodo sobrando e quer ganhar um dinheirinho extra? Anuncie seu quarto com a gente!</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center red-text"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Personalize seu perfil</h5>
+
+            <p class="light">Faça seu cadastro e descubra já quais são os quartos disponíveis especialmente para você!</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><br><br><br><br><br>
+
+    <div class="section">
+
+    </div>
+  </div>
+
+  <footer class="page-footer red darken-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Sobre nós</h5>
+          <p class="grey-text text-lighten-4">Nós somos uma empresa que busca proporcionar o máximo de conforto possível para nossos usuários enquanto eles aproveitam suas viagens. Para tal, fazemos o possível para providenciar que eles consigam estadia para onde quer que vão.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Links úteis</h5>
+          <ul>
+            <li><a class="white-text" href="/login">Entrar</a></li>
+            <li><a class="white-text" href="/signup">Logar</a></li>
+            <li><a class="white-text" href="/profile">Perfil</a></li>
+            <li><a class="white-text" href="/adicionarquarto">Cadastre seu quarto</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+  <script src="../node_modules/sweetalert/lib/sweet-alert.js"></script>
+  <script src="../node_modules/angular-sweetalert/SweetAlert.js"></script>
+  <script src="../bower_components/ngSweetalert/SweetAlert.min.js"></script>
+
+  </body>
 </html>

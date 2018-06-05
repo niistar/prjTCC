@@ -1,0 +1,31 @@
+<html ng-app="a" ng-controller="b">
+
+<head>
+  <script src="../node_modules/sweetalert/lib/sweet-alert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <link rel="stylesheet" href="../node_modules/sweetalert/lib/sweet-alert.css">
+  <script src="../node_modules/angular-sweetalert/SweetAlert.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+  <script src="../bower_components/ngSweetalert/SweetAlert.min.js"></script>
+</head>
+
+
+<body>
+  <button id="botao" ng-click="clique()">ASDADA</button>
+  <script>
+
+  var app = angular.module('a', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
+
+  app.controller('b', ['$scope', '$http', 'SweetAlert', function ($scope, $http) {
+      $scope.clique = function(){
+          console.log("wje");
+          swal("teste");
+      }
+  }]);
+  </script>
+  
+</body>
+
+</html>
