@@ -18,10 +18,12 @@ var userSchema = new mongoose.Schema({
         CEP : String,
         RG : String,
         dataNasc : Date,
-        saldo : Number,
+        //saldo : Number,
         password : String,
-        quartosCadastrados : [{type: Number, ref: 'Quarto'}],
-        quartos : [{type: Number, ref: 'Quarto'}]
+        horaInicialTurno: Date,
+        horaFinalTurno: Date,
+        //turnos : [{type: Number, ref: 'Quarto'}],
+        maquinas : [{type: Number, ref: 'Quarto'}]
 
         
 });
