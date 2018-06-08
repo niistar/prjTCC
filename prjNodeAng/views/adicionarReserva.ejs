@@ -32,12 +32,12 @@
 <body ng-app="myApp" ng-controller='reservaController'>
    
 <nav class="teal darken-2" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Hotéis.com</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Máquinas</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
-        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
-        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
-        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
+        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
+        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Máquinas</a></li>
+        <li><a href="/encerrarReserva" style="font-size:18px">Meus turnos</a></li>
+        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Máquinas</a></li>
 
         <li><a href="/logout" >Logout</a></li>
       </ul>
@@ -62,7 +62,7 @@
     
 <div class="container">
     <section>
-    <h1 class="header teal-text">Quartos disponíveis</h1>
+    <h1 class="header teal-text">Máquinas disponíveis</h1>
     <br><br><form name='formReserva'>
   <div class='input-field col s6'>
     <br>
@@ -77,13 +77,12 @@
   
     <table class="highlight">
   <tr>
-    <th>Título</th>
-    <th>Rua</th>
-    <th>Número</th>
-    <th>Cidade</th>
-    <th>Estado</th>
-    <th>Descrição</th>
-    <th>Preço</th>
+    <th>Nome</th>
+    <th>Modelo</th>
+    <th>Capacidade</th>
+    <th>Tipo</th>
+    <th>Observações</th>
+    <th>Status</th>
   </tr>
   <tr ng-repeat="quarto in quartos">
     <td>{{quarto._id}}</td>
@@ -93,7 +92,6 @@
     <td>{{quarto.cidade}}</td>
     <td>{{quarto.estado}}</td>
     <td>{{quarto.desc}}</td>
-    <td>{{quarto.preco | currency : "R$ "}}</td>
     <td><a class="waves-effect waves-light btn" value='salvar' type='submit' ng-click="formReserva.$valid && reservar(quarto)"><i class="material-icons right">send</i>Reservar</a></td>
   </tr>
 </table></form>
@@ -108,7 +106,7 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">Sobre nós</h5>
-          <p class="grey-text text-lighten-4">Nós somos uma empresa que busca proporcionar o máximo de conforto possível para nossos usuários enquanto eles aproveitam suas viagens. Para tal, fazemos o possível para providenciar que eles consigam estadia para onde quer que vão.</p>
+          <p class="grey-text text-lighten-4">//</p>
 
 
         </div>
@@ -117,10 +115,10 @@
         <div class="col l3 s12">
           <h5 class="white-text">Links úteis</h5>
           <ul>
-            <li><a class="white-text" href="/adicionarReserva">Reserve um quarto</a></li>
-            <li><a class="white-text" href="/encerrarReserva">Encerrar suas reservas</a></li>
-            <li><a class="white-text" href="/profile">Perfil</a></li>
-            <li><a class="white-text" href="/adicionarquarto">Cadastre seu quarto</a></li>
+            <li><a class="white-text" href="/adicionarReserva">//</a></li>
+            <li><a class="white-text" href="/encerrarReserva">//</a></li>
+            <li><a class="white-text" href="/profile">//</a></li>
+            <li><a class="white-text" href="/adicionarquarto">//</a></li>
           </ul>
         </div>
       </div>
