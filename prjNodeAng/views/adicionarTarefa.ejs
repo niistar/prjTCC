@@ -35,9 +35,9 @@
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Máquinas</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
-        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Máquinas</a></li>
+        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
         <li><a href="/encerrarReserva" style="font-size:18px">Meus turnos</a></li>
-        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Máquinas</a></li>
+        <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar tarefas</a></li>
 
         <li><a href="/logout" >Logout</a></li>
       </ul>
@@ -62,41 +62,32 @@
     
 <div class="container">
     <section>
-    <h1 class="header teal-text">Máquinas disponíveis</h1>
+    <h1 class="header teal-text">Cadastrar uma nova tarefa</h1>
     <br><br><form name='formReserva'>
   <div class='input-field col s6'>
     <br>
-  <input type='date' name='data_ent' ng-model='data_inicio' required/><br><br>
-  <label for="data_ent">Data de entrada*</label>
+  <input type='text' name='nome_tar' ng-model='nome_tar' required/><br><br>
+  <label for="nome_tar">Nome da tarefa</label>
   </div>
   <div class='input-field col s6'><br>
-  <input type='date' name='data_sai' ng-model='data_fim' required /><br><br>
-  <label for="data_sai">Data de saída*</label>
+  <input type='number' name='horas_tar' ng-model='horas_tar' required /><br><br>
+  <label for="horas_tar">Horas necessárias para a tarefa</label>
   </div>
-  <span style="font-size: 10px; font-style:italic">*Campos Obrigatórios</span>
-  
+
+  <a class="waves-effect waves-light btn" value='salvar' type='submit' ng-click="adicionarTarefa()"><i class="material-icons right">send</i>Adicionar</a>
     <table class="highlight">
   <tr>
-    <th>Nome</th>
-    <th>Modelo</th>
-    <th>Capacidade</th>
-    <th>Tipo</th>
-    <th>Observações</th>
-    <th>Status</th>
+    <th>Nome da tarefa</th>
+    <th>Horas necessárias para a tarefa</th>
   </tr>
-  <tr ng-repeat="quarto in quartos">
-    <td>{{quarto._id}}</td>
-    <td>{{quarto.titulo}}</td>
-    <td>{{quarto.rua}}</td>
-    <td>{{quarto.numero}}</td>
-    <td>{{quarto.cidade}}</td>
-    <td>{{quarto.estado}}</td>
-    <td>{{quarto.desc}}</td>
-    <td><a class="waves-effect waves-light btn" value='salvar' type='submit' ng-click="formReserva.$valid && reservar(quarto)"><i class="material-icons right">send</i>Reservar</a></td>
+  <tr ng-repeat="tarefa in tarefas">
+    <td>{{tarefa.nomeTarefa}}</td>
+    <td>{{tarefa.horasNecessarias}}</td>
+    <td><a class="waves-effect waves-light btn" value='editar' type='submit' ng-click="deletarTarefa(tarefa)"><i class="material-icons right">edit</i>Remover</a></td>
   </tr>
 </table></form>
+
     </section>
-    <button id='botao' ng-click="alert()">aaa</button>
 </div>
 
 
@@ -145,17 +136,17 @@
   var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
   
   app.controller('reservaController', ['$scope', '$http', 'SweetAlert', function ($scope, $http) {
-          $scope.quartos = [];
+          $scope.tarefas = [];
 
           $scope.func  = function(){
-          $http.get('/users/adicionarReserva').then(function(response)
+          $http.get('/users/adicionarTarefa').then(function(response)
             {
-              $scope.quartos = response.data;
+              $scope.tarefas = response.data;
             });   
           }
-          $scope.reservar = function(quarto){
+          $scope.adicionarTarefa = function(){
             swal({
-            title: "Reservar o quarto?",
+            title: "Adicionar tarefa?",
             text: "O valor da reserva será debitado do seu saldo!",
             type: "warning",
             showCancelButton: true,
@@ -164,28 +155,37 @@
             closeOnConfirm: false}, 
           function(){ 
             var data = ({
-                _id: quarto._id,
-                titulo: $scope.titulo,
-                rua: $scope.rua,
-                numero: $scope.numero,
-                cidade: $scope.cidade,
-                estado: $scope.estado,
-                preco: quarto.preco,
-                data_inicio: $scope.data_inicio,
-                data_fim: $scope.data_fim
+                nomeTarefa: $scope.nome_tar,
+                horasNecessarias: $scope.horas_tar
             });
             console.log(data);
 
-            $http.post('/users/adicionarReserva/', data).then(function (response) {
+            $http.post('/users/adicionarTarefa/', data).then(function (response) {
           }, function (response) {
           console.log("erro");
           });
-          swal("Parabéns! Você reservou o quarto! ");
+          swal("Parabéns! Você criou uma tarefa! ");
           $scope.func();
           $scope.data_inicio = null;
           $scope.data_fim = null;
           }
             )};
+
+
+            $scope.deletarTarefa = function(tarefa){
+            var data = ({
+                nomeTarefa: tarefa.nomeTarefa,
+                horasNecessarias: tarefa.horasNecessarias
+
+            });
+            console.log(data);
+          $http.post('users/deletarTarefa', data).then(function (response) {
+          }, function (response) {
+          console.log("erro");
+          
+        });
+        $scope.func();
+        };
         $scope.func();
 
   }])

@@ -29,15 +29,15 @@
         }
     </style>
 </head>
-<body ng-app="myApp" ng-controller='quartoController'>
+<body ng-app="myApp" ng-controller='maquinaController'>
    
 <nav class="teal darken-2" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo" name="logo">Máquinas</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
-        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Máquinas</a></li>
+        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
         <li><a href="/encerrarReserva" style="font-size:18px">Meus turnos</a></li>
-        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Máquinas</a></li>
+        <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar Tarefas</a></li>
         
         <li><a href="/logout" >Logout</a></li>
       </ul>
@@ -66,32 +66,32 @@
     <div class='input-field col s6'>
     <section>
       <div>
-      <input type='text' ng-model='titulo' id='titulo' /><br><br>
-      <label for="titulo">Nome da máquina</label>
+      <input type='text' ng-model='nome' id='nome' /><br><br>
+      <label for="nome">Nome da máquina</label>
       </div>
       <div class='input-field col s6'>
-      <input type='text' ng-model='rua' id='rua'/><br><br>
-      <label for="rua">Modelo da máquina</label>
+      <input type='text' ng-model='modelo' id='modelo'/><br><br>
+      <label for="modelo">Modelo da máquina</label>
       </div>
       <div class='input-field col s6'>
-      <input type='number' ng-model='numero' id='numero'/><br><br>
-      <label for="numero">Capacidade em horas</label>
+      <input type='number' ng-model='horas' id='horas'/><br><br>
+      <label for="horas">Capacidade em horas</label>
       </div>
       <div class='input-field col s6'>
-      <input type='text' ng-model='cidade' id='cidade'/><br><br>
-      <label for="cidade">Tipo da máquina</label>
+      <input type='text' ng-model='tipo' id='tipo'/><br><br>
+      <label for="tipo">Tipo da máquina</label>
       </div>
       <div class='input-field col s6'>
-      <input type='text' ng-model='estado' id='estado'/><br><br>
-      <label for="estado">Observações</label>
+      <input type='text' ng-model='obs' id='obs'/><br><br>
+      <label for="obs">Observações</label>
       </div>
       <div class='input-field col s6'>
-      <input type='text' ng-model='desc' id='desc'/><br><br>
-      <label for="desc">Status</label>
+      <input type='text' ng-model='status' id='status'/><br><br>
+      <label for="status">Status</label>
       </div>
       
       <!--<input type='submit' value='salvar' ng-click="adicionarQuarto()"/>-->
-      <a class="btn-floating btn-large waves-effect waves-light teal darken-3" value='salvar' type='submit' ng-click="adicionarQuarto()"><i class="material-icons">add</i></a>
+      <a class="btn-floating btn-large waves-effect waves-light teal darken-3" value='salvar' type='submit' ng-click="adicionarMaquina()"><i class="material-icons">add</i></a>
       </form>
      
 <br><br><br>
@@ -106,14 +106,14 @@
     <th>Observações</th>
     <th>Status</th>
   </tr>
-  <tr ng-repeat="quarto in quartos">
-    <td>{{quarto._id}}</td>
-    <td>{{quarto.titulo}}</td>
-    <td>{{quarto.rua}}</td>
-    <td>{{quarto.numero}}</td>
-    <td>{{quarto.cidade}}</td>
-    <td>{{quarto.estado}}</td>
-    <td>{{quarto.desc}}</td>
+  <tr ng-repeat="maquina in maquinas">
+    <td>{{maquina.nomeMaquina}}</td>
+    <td>{{maquina.modeloMaquina}}</td>
+    <td>{{maquina.capacidadeHoras}}</td>
+    <td>{{maquina.tipoMaquina}}</td>
+    <td>{{maquina.observacoesMaquina}}</td>
+    <td>{{maquina.statusMaquina}}</td>
+    <td><a class="waves-effect waves-light btn" value='editar' type='submit' ng-click="deletarMaquina(maquina)"><i class="material-icons right">edit</i>Remover</a></td>
   </tr>
 </table>
     </section>
@@ -166,10 +166,10 @@
   <script>
   var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
   
-  app.controller('quartoController', ['$scope', '$http', function ($scope, $http) {
-          $scope.adicionarQuarto = function () {
+  app.controller('maquinaController', ['$scope', '$http', function ($scope, $http) {
+          $scope.adicionarMaquina = function () {
           swal({
-            title: "Cadastrar a máquina??",
+            title: "Cadastrar a máquina?",
             text: "Cheque se está tudo certo!",
             type: "warning",
             showCancelButton: true,
@@ -177,50 +177,68 @@
             confirmButtonText: "Confirmar",
             closeOnConfirm: false}, 
             function(){ 
-          $scope.quartos = [];
+          $scope.maquinas = [];
 
             var data = ({
-                titulo: $scope.titulo,
-                rua: $scope.rua,
-                numero: $scope.numero,
-                cidade: $scope.cidade,
-                estado: $scope.estado,
-                desc: $scope.desc,
-                preco: $scope.preco
+                nomeMaquina: $scope.nome,
+                modeloMaquina: $scope.modelo,
+                capacidadeHoras: $scope.horas,
+                tipoMaquina: $scope.tipo,
+                observacoesMaquina: $scope.obs,
+                statusMaquina: $scope.status
             });
             console.log(data);
             
-          $http.get('/users/adicionarQuarto').then(function(response)
+          $http.get('/users/adicionarMaquina').then(function(response)
             {
-              $scope.quartos = response.data;
+              $scope.maquinas = response.data;
+              
             });   
 
-          $http.post('users/adicionarQuarto', data).then(function (response) {
+          $http.post('users/adicionarMaquina', data).then(function (response) {
           }, function (response) {
           console.log("erro");
         });
         swal("A máquina foi adicionada com sucesso!");
         $scope.func();
-        $scope.titulo = null,
-        $scope.rua = null,
-        $scope.numero = null,
-        $scope.cidade = null,
-        $scope.estado = null,
-        $scope.desc = null,
-        $scope.preco = null
+        $scope.nome = null,
+        $scope.modelo = null,
+        $scope.horas = null,
+        $scope.tipo = null,
+        $scope.obs = null,
+        $scope.status = null
         $scope.func();
             }
             );
 
         };
           $scope.func  = function(){
-            $http.get('/users/adicionarQuarto').then(function(response)
+            $http.get('/users/adicionarMaquina').then(function(response)
             {
-              $scope.quartos = response.data;
+              $scope.maquinas = response.data;
             });   
           }
         
+        $scope.deletarMaquina = function(maquina){
+          var data = ({
+                nomeMaquina: maquina.nomeMaquina,
+                modeloMaquina: maquina.modeloMaquina,
+                capacidadeHoras: maquina.capacidadeHoras,
+                tipoMaquina: maquina.tipoMaquina,
+                observacoesMaquina: maquina.observacoesMaquina,
+                statusMaquina: maquina.statusMaquina
+            });
+            console.log(data);
+          $http.post('users/deletarMaquina', data).then(function (response) {
+          }, function (response) {
+          console.log("erro");
+          
+        });
         $scope.func();
+        };
+
+        $scope.func();
+
   }])
   
   

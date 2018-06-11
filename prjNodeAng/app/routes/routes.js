@@ -1,18 +1,26 @@
 var mongoose = require('mongoose');
 var User = require('../models/user.js');
-var Quarto = require('../models/quarto.js');
+var Maquina = require('../models/maquina.js');
+var Tarefa = require ('../models/tarefa.js');
 
 // app/routes.js
 module.exports = function(app, passport) {
 
-    app.get('/adicionarQuarto', isLoggedIn, function(req, res, next) {
-        res.render('adicionarQuarto.ejs',{
+    app.get('/adicionarMaquina', isLoggedIn, function(req, res, next) {
+        res.render('adicionarMaquina.ejs',{
 
         user:req.user});
     });
 
-    app.get('/users/adicionarQuarto', isLoggedIn, function(req, res, next) {
-        Quarto.find({dono : req.user._id}, function(err, user){
+    app.get('/escalonar', isLoggedIn, function(req, res, next) {
+        res.render('escalonar.ejs',{
+
+        user:req.user});
+    });
+
+    app.get('/users/adicionarMaquina', isLoggedIn, function(req, res, next) {
+        
+        Maquina.find({}, function(err, user){
         if(err){
             return res.send();
         }
@@ -21,18 +29,10 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.post('/users/adicionarQuarto', isLoggedIn, function(req, res, next) {
-        var quarto1 = new Quarto(req.body);
+    app.post('/users/adicionarMaquina', isLoggedIn, function(req, res, next) {
+        var maquina1 = new Maquina(req.body);
 
-        User.findByIdAndUpdate(req.user._id, 
-        {$push : {"quartosCadastrados" : quarto1._id}},
-        {safe: true, upsert: true},function(err, quarto1){
-            console.log(err);
-        });
-
-        quarto1.dono = req.user._id;
-        quarto1.reservado = false;
-        quarto1.save(function(err){
+        maquina1.save(function(err){
             if(err) return console.error(err);
         });
         
@@ -40,104 +40,58 @@ module.exports = function(app, passport) {
 
     });
 
-    app.get('/adicionarReserva', isLoggedIn, function(req, res, next) {
-        res.render('adicionarReserva.ejs',{
+    app.post('/users/deletarMaquina', isLoggedIn, function(req, res, next) {
+        var maquina1 = new Maquina(req.body);
+
+        Maquina.findOneAndRemove({'modeloMaquina': maquina1.modeloMaquina}, function(err, user){
+            if(err){
+                return res.send();
+            }
+            });
+    });  
+
+    app.get('/adicionarTarefa', isLoggedIn, function(req, res, next) {
+        res.render('adicionarTarefa.ejs',{
 
         user:req.user});
         
     });
 
-    app.get('/users/adicionarReserva', isLoggedIn, function(req, res, next) {
-  
-        Quarto.find({dono:{'$ne':req.user._id}, reservado:false}, function(err, user){
-        if(err){
-            return res.send();
-        }
-        else
-        res.json(user);
-        });
+    app.get('/users/adicionarTarefa', isLoggedIn, function(req, res, next) {
+        Tarefa.find({}, function(err, user){
+            if(err){
+                return res.send();
+            }
+            else
+            res.json(user);
+            });
     });
 
-    app.post('/users/adicionarReserva/', isLoggedIn, function(req, res, next) {
-        var idzao = req.body._id;
-        console.log(req.body);
-        Quarto.findById(idzao, function(err, quarto1){
-            quarto1.reservado = true;
-            quarto1.reservante = req.user._id;
-            quarto1.data_inicio = req.body.data_inicio;
-            quarto1.data_fim = req.body.data_fim;
-            
-            quarto1.save(function(err, novoQuarto){
-                if(err) return handleError(err);
-                res.send(novoQuarto);
-                console.log(novoQuarto);
-            });
+    app.post('/users/adicionarTarefa/', isLoggedIn, function(req, res, next) {
+        var tarefa1 = new Tarefa(req.body);
 
-        });
-        User.findByIdAndUpdate(req.user._id, 
-        {$push : {"quartos" : idzao}},
-        {safe: true, upsert: true},function(err, quarto1){
-            console.log(err);
-        });
-        User.findById(req.user._id, function(err, user2){
-            user2.saldo = user2.saldo - req.body.preco;
-            user2.save(function(err, novoUser){
-            });
-        });
-        Quarto.findById(idzao, function(err, quarto9){
-        User.findById(quarto9.dono, function(err, user3){
-            user3.saldo = user3.saldo + req.body.preco;
-            user3.save(function(err, novoUser2){
-            });
-        });
+        tarefa1.save(function(err){
+            if(err) return console.error(err);
         });
     });    
 
-    app.get('/encerrarReserva', isLoggedIn, function(req, res, next){
-        res.render('encerrarReserva.ejs',
-        {
-            user : req.user
-        });
-    });
-    
-    app.get('/users/encerrarReserva', isLoggedIn, function(req, res, next)
-    {
-        Quarto.find({reservante : req.user._id}, function(err, user){
-        if(err){
-            return res.send();
-        }
-        else
-        res.json(user);
-        });
-    }
-    );
+    app.post('/users/deletarTarefa', isLoggedIn, function(req, res, next) {
+        var tarefa1 = new Tarefa(req.body);
 
-    app.post('/users/encerrarReserva', isLoggedIn, function(req, res, next)
-    {
-        idzao = req.body._id;
-        var nota = req.body.nota;
-        console.log(nota);
-        Quarto.findById(idzao, function(err, quarto9){
-            quarto9.reservado = false;
-            quarto9.data_fim = undefined;
-            quarto9.data_inicio = undefined;
-            
-            quarto9.save(function(err, novoQuarto1){
+        Maquina.findOne({_id: tarefa1._id}, function(err, user){
+            if(err){
+                return res.send();
+            }
+            console.log(user);
             });
-        });
-        Quarto.findByIdAndUpdate(idzao, 
-        {$pull : {"reservante" : req.user._id}},
-        {safe: true, upsert: true},function(err, quarto1){
-            console.log(err);
-        });
 
-        User.findByIdAndUpdate(req.user._id, 
-        {$pull : {"quartos" : idzao}},
-        {safe: true, upsert: true},function(err, quarto1){
-            console.log(err);
-        });
-    }
-    );
+        Maquina.findOneAndRemove({_id: tarefa1._id}, function(err, user){
+            if(err){
+                return res.send();
+            }
+            });
+        
+    });  
 
     app.get('/completarCadastro', isLoggedIn, function(req, res, next){
         res.render('completarCadastro.ejs',
@@ -164,22 +118,12 @@ module.exports = function(app, passport) {
             user2.telefone = req.body.telefone;
             user2.celular = req.body.celular;
             user2.dataNasc = req.body.dataNasc;
-            user2.saldo = req.body.saldo;
             
             user2.save(function(err, usernovo1){
             });
         });
     });
     
-    app.get('/users/profile', isLoggedIn, function(req, res, next){
-        Quarto.find({reservante : req.user._id}, function(err, user){
-        if(err){
-            return res.send();
-        }
-        else
-        res.json(user);
-        });
-    });
     app.get('/users/completarCadastro', isLoggedIn, function(req, res, next){
         User.findById(req.user._id, function(err, user){
             if(err){

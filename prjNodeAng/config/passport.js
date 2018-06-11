@@ -5,7 +5,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 
 // load up the user model
 var User            = require('../app/models/user');
-var Quarto          = require('../app/models/quarto');
+var Maquina          = require('../app/models/maquina');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -23,21 +23,21 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        /*User.findById(id, function(err, user) {
+        User.findById(id, function(err, user) {
             done(err, user);
-        });*/
-        User.findById(id)
-        .populate('quartos')
-        .exec(function(err, user){
-            if(err){
-                console.log(err);
-            }
-            else{
-            done(err, user); 
-            //console.log(user.quarto[0]);
-            }
-            
         });
+        // User.findById(id)
+        // .populate('quartos')
+        // .exec(function(err, user){
+        //     if(err){
+        //         console.log(err);
+        //     }
+        //     else{
+        //     done(err, user); 
+        //     //console.log(user.quarto[0]);
+        //     }
+            
+        // });
 /*
         User.findById(id)
         .populate({path : 'quartos',

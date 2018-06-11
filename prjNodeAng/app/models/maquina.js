@@ -6,6 +6,7 @@ var bcrypt   = require('bcrypt-nodejs');
 var maquinaSchema = new mongoose.Schema({
         
         //_id: Number,
+        nomeMaquina: String,
         capacidadeHoras: Number,
         tipoMaquina: String,
         modeloMaquina: String,
@@ -31,4 +32,4 @@ var maquinaSchema = new mongoose.Schema({
         
 });
 
-module.exports = mongoose.model('Quarto', maquinaSchema);
+module.exports = mongoose.model('Maquina', maquinaSchema);

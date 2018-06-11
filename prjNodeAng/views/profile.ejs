@@ -31,18 +31,18 @@
     <div class="nav-wrapper container"><a id="logo-container" href="http://imgur.com/a/mG9js" >Hotéis.com</a>
       
       <ul class="right hide-on-med-and-down">
-        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
-        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
-        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
-        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
+        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
+        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquina</a></li>
+        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
+        <li><a href="/adicionarTarefa" style="font-size:18px">Adicionar Tarefa</a></li>
         <li><a href="/logout" >Logout</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
         <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
-        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
-        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
-        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
+        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Máquina</a></li>
+        <li><a href="/encerrarReserva" style="font-size:18px">Meus turnos</a></li>
+        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Máquina</a></li>
         <li><a href="/logout" >Logout</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -87,7 +87,6 @@
                         <i class="small material-icons">perm_identity</i>
                         <strong class="vertical-align: middle" style="font-size:16px">Data de Nascimento</strong>: <%= user.dataNasc %><br><br>
                         <i class="small material-icons">attach_money</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">Saldo</strong>: <%= user.saldo %><br><br><br>
                          <td><a class="waves-effect waves-light btn" href="/completarCadastro"><i class="material-icons right">send</i>Editar perfil</a></td>
                         
     </div>

@@ -17,7 +17,7 @@ var configDB = require('./config/db.js');
 
 //var mongoose = require('mongoose');
 var User            = require('./app/models/user');
-var Quarto          = require('./app/models/quarto');
+var Maquina          = require('./app/models/maquina');
 var users           = require('./app/routes/users.js');
 
 // configuration ===============================================================

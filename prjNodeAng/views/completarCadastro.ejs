@@ -116,10 +116,6 @@
       <div class='input-field col s6'>
       <input type='date' ng-model='dataNasc' id='dataNasc'/>Data de nascimento<br><br>
       </div>
-      <div class='input-field col s6'>
-      <input type='number' ng-model='saldo' id='saldo'/><br><br>
-      <label for="saldo">Saldo</label>
-      </div>
 
       <!--<input type='submit' value='salvar' ng-click="adicionarQuarto()"/>-->
       <td><a class="waves-effect waves-light btn" value='salvar' type='submit' ng-click="completarCadastro()"><i class="material-icons right">send</i>Confirmar</a></td>
@@ -193,7 +189,6 @@
                 cep : $scope.cep,
                 rg : $scope.rg,
                 dataNasc : $scope.dataNasc,
-                saldo : $scope.saldo
             });
             console.log(data);
               

@@ -37,7 +37,7 @@
       <ul class="right hide-on-med-and-down">
        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
         <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Máquinas</a></li>
-        <li><a href="/encerrarReserva" style="font-size:18px">Meus turnos</a></li>
+        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
         <li><a href="/adicionarReserva" style="font-size:18px">Reservar Máquinas</a></li>
         <li><a href="/logout" >Logout</a></li>
       </ul>
@@ -55,7 +55,7 @@
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       
-      <h1 class="header teal-text">Já está de saída?</h1>
+      <h1 class="header teal-text">Escalonar</h1>
 
     </div>
   </div>
@@ -63,39 +63,47 @@
     
 <div class="container">
     <section>
-    <h1 class="header teal-text">Minhas reservas em aberto</h1>
-  <table class='highlight-table'>
-  <tr>
-    <th>Título</th>
-    <th>Rua</th>
-    <th>Número</th>
-    <th>Cidade</th>
-    <th>Estado</th>
-    <th>Descrição</th>
-    <th>Data de entrada</th>
-    <th>Data de saída</th>
-    <th>Preço</th>
-    <th>Avaliar (0 à 5)</th>
-  </tr>
-  <tr ng-repeat="quarto in quartos">
-    <td>{{quarto.titulo}}</td>
-    <td>{{quarto.rua}}</td>
-    <td>{{quarto.numero}}</td>
-    <td>{{quarto.cidade}}</td>
-    <td>{{quarto.estado}}</td>
-    <td>{{quarto.desc}}</td>
-    <td>{{quarto.data_inicio}}</td>
-    <td>{{quarto.data_fim}}</td>
-    <td>{{quarto.preco | currency : "R$ "}}</td><td>
-    
-</td>
-            </div>
-        </div>
-    <td><a class="waves-effect waves-light btn" value='salvar' type='submit' ng-click="encerrar(quarto)"><i class="material-icons right">send</i>Encerrar</a></td>
-  </tr>
-</table></form>
+    <h1 class="header teal-text">Tarefas disponíveis</h1>
+    <table class="highlight">
+      <tr>
+        <th>Nome da tarefa</th>
+        <th>Horas necessárias para a tarefa</th>
+      </tr>
+      <tr ng-repeat="tarefa in tarefas">
+        <td>{{tarefa.nomeTarefa}}</td>
+        <td>{{tarefa.horasNecessarias}}</td>
+      </tr>
+    </table></form>
     </section>
 </div>
+
+<div class="container">
+  <section>
+  <h1 class="header teal-text">Máquinas</h1>
+  <table class="highlight">
+    <tr>
+      <th>Nome</th>
+      <th>Modelo</th>
+      <th>Capacidade</th>
+      <th>Tipo</th>
+      <th>Observações</th>
+      <th>Status</th>
+    </tr>
+    <tr ng-repeat="maquina in maquinas">
+      <td>{{maquina.nomeMaquina}}</td>
+      <td>{{maquina.modeloMaquina}}</td>
+      <td>{{maquina.capacidadeHoras}}</td>
+      <td>{{maquina.tipoMaquina}}</td>
+      <td>{{maquina.observacoesMaquina}}</td>
+      <td>{{maquina.statusMaquina}}</td>
+    </tr>
+  </table></form>
+  </section>
+  <div>
+    <td><a class="waves-effect waves-light btn" value='escalonar' type='submit' ng-click="escalonar()"><i class="material-icons right">edit</i>Escalonar</a></td>
+  </div>
+</div>
+
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -144,50 +152,66 @@
   var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
   
   app.controller('reservaController', ['$scope', '$http', function ($scope, $http) {
-          $scope.quartos = [];
+          $scope.maquinas = [];
+          $scope.tarefas = [];
           $scope.func  = function(){
-          $http.get('/users/encerrarReserva').then(function(response)
+            $http.get('/users/adicionarMaquina').then(function(response)
             {
-              $scope.quartos = response.data;
+              $scope.maquinas = response.data;
+            });  
+          
+          $http.get('/users/adicionarTarefa').then(function(response)
+            {
+              $scope.tarefas = response.data;
             });   
           }
-          $scope.encerrar = function(quarto){
+          $scope.escalonar = function(){
             swal({
-            title: "Encerrar sua reserva?",
-            text: "Isso não poderá ser desfeito e você terá que deixar seu quarto - Não se esqueça de avaliar sua estadia!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Confirmar",
-            closeOnConfirm: false}, 
-            function(){ 
-                var data = ({
-                    _id: quarto._id,
-                    titulo: $scope.titulo,
-                    rua: $scope.rua,
-                    numero: $scope.numero,
-                    cidade: $scope.cidade,
-                    estado: $scope.estado,
-                    preco: quarto.preco,
-                    data_inicio: $scope.data_inicio,
-                    data_fim: $scope.data_fim,
+              title: "O resultado do seu escalonamento",
+              imageUrl: "http://www.castan.pt/castan/wp-content/uploads/2014/07/img-teste-01.jpg",
+              imageSize: '250x250'
+
+            })
+          
+        }
+        //   $scope.encerrar = function(quarto){
+        //     swal({
+        //     title: "Encerrar sua reserva?",
+        //     text: "Isso não poderá ser desfeito e você terá que deixar seu quarto - Não se esqueça de avaliar sua estadia!",
+        //     type: "warning",
+        //     showCancelButton: true,
+        //     confirmButtonColor: "#DD6B55",
+        //     confirmButtonText: "Confirmar",
+        //     closeOnConfirm: false}, 
+        //     function(){ 
+        //         var data = ({
+        //             _id: quarto._id,
+        //             titulo: $scope.titulo,
+        //             rua: $scope.rua,
+        //             numero: $scope.numero,
+        //             cidade: $scope.cidade,
+        //             estado: $scope.estado,
+        //             preco: quarto.preco,
+        //             data_inicio: $scope.data_inicio,
+        //             data_fim: $scope.data_fim,
                     
-                });
+        //         });
 
-            console.log($scope.starRating1);
+        //     console.log($scope.starRating1);
 
-            $http.post('/users/encerrarReserva/', data).then(function (response) {
+        //     $http.post('/users/encerrarReserva/', data).then(function (response) {
                 
-          }, function (response) {
-          console.log("erro");
-        });
-        swal("Sua reserva foi cancelada com sucesso!");
-        $scope.func();
-            }
-            );
+        //   }, function (response) {
+        //   console.log("erro");
+        // });
+        // swal("Sua reserva foi cancelada com sucesso!");
+        // $scope.func();
+        //     }
+        //     );
 
-          }
+        //   }
         $scope.func();
+        
 
   }])//script
   

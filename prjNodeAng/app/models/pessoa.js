@@ -23,7 +23,7 @@ var userSchema = new mongoose.Schema({
         horaInicialTurno: Date,
         horaFinalTurno: Date,
         //turnos : [{type: Number, ref: 'Quarto'}],
-        maquinas : [{type: Number, ref: 'Quarto'}]
+        maquinas : [{type: Number, ref: 'Maquina'}]
 
         
 });

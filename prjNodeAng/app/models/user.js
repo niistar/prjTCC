@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Quarto = require('./quarto.js');
+var Maquina = require('./maquina.js');
 var bcrypt   = require('bcrypt-nodejs');
 
 
