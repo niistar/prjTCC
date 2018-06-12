@@ -32,29 +32,20 @@
 <body ng-app="myApp" ng-controller='quartoController'>
    
 <nav class="orange darken-4" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Hotéis.com</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Máquinas</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
-        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
-        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
-        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
+        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
+        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
+        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
+        <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar tarefas</a></li>
         <li><a href="/logout" >Logout</a></li>
       </ul>
-
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
-        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
-        <li><a href="/encerrarReserva" style="font-size:18px">Minhas Reservas</a></li>
-        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Quarto</a></li>
-        <li><a href="/logout" >Logout</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       
-      <h1 class="header teal-text">Anuncie seu quarto!</h1>
+      <h1 class="header teal-text">Perfil</h1>
       <br>
 
     </div>
@@ -127,27 +118,6 @@
 
 
 <footer class="page-footer orange darken-4">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Sobre nós</h5>
-          <p class="grey-text text-lighten-4">Nós somos uma empresa que busca proporcionar o máximo de conforto possível para nossos usuários enquanto eles aproveitam suas viagens. Para tal, fazemos o possível para providenciar que eles consigam estadia para onde quer que vão.</p>
-
-
-        </div>
-        <div class="col l3 s12">
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Links úteis</h5>
-          <ul>
-            <li><a class="white-text" href="/adicionarReserva">Reserve um quarto</a></li>
-            <li><a class="white-text" href="/encerrarReserva">Encerrar suas reservas</a></li>
-            <li><a class="white-text" href="/profile">Perfil</a></li>
-            <li><a class="white-text" href="/adicionarquarto">Cadastre seu quarto</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
     <div class="footer-copyright">
       <div class="container">
       Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>

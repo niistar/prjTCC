@@ -36,19 +36,12 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
         <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
-        <li><a href="/encerrarReserva" style="font-size:18px">Meus turnos</a></li>
+        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
         <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar Tarefas</a></li>
         
         <li><a href="/logout" >Logout</a></li>
       </ul>
 
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="/adicionarQuarto" style="font-size:18px">Cadastrar Quarto</a></li>
-        <li><a href="/adicionarReserva" style="font-size:18px">Reserve um quarto</a></li>
-        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %> &nbsp; saldo: R$ <%= user.saldo %></a></li>
-        <li><a href="/logout" style="font-size:18px">Logout</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
   <div class="section no-pad-bot" id="index-banner">
@@ -123,27 +116,7 @@
 
 
 <footer class="page-footer teal darken-4">
-   <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Sobre nós</h5>
-          <p class="grey-text text-lighten-4">//</p>
-
-
-        </div>
-        <div class="col l3 s12">
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Links úteis</h5>
-          <ul>
-            <li><a class="white-text" href="/adicionarReserva">//</a></li>
-            <li><a class="white-text" href="/encerrarReserva">//</a></li>
-            <li><a class="white-text" href="/profile">//</a></li>
-            <li><a class="white-text" href="/adicionarquarto">// </a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+   
     <div class="footer-copyright">
       <div class="container">
       Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
