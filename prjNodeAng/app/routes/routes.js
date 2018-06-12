@@ -76,16 +76,8 @@ module.exports = function(app, passport) {
     });    
 
     app.post('/users/deletarTarefa', isLoggedIn, function(req, res, next) {
-        var tarefa1 = new Tarefa(req.body);
 
-        Maquina.findOne({_id: tarefa1._id}, function(err, user){
-            if(err){
-                return res.send();
-            }
-            console.log(user);
-            });
-
-        Maquina.findOneAndRemove({_id: tarefa1._id}, function(err, user){
+        Tarefa.findOneAndRemove({'nomeTarefa': req.body.nomeTarefa}, function(err, user){
             if(err){
                 return res.send();
             }
