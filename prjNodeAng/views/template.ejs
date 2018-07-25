@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
+      <link rel="stylesheet" type="text/css" href="../node_modules/sweetalert/lib/sweet-alert.css">
+      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--<title>Node Authentication</title>-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        /*body        { padding-top:80px; word-wrap:break-word; }*/
+        .material-icons, .icon-text {
+      vertical-align: middle;
+    }
+        nav ul a{
+            font-size: 18px;
+        }
+        nav ul a:hover{
+            color:#fff;
+            text-decoration: none;
+        }
+        html{
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller='maquinaController'>
+   
+<nav class="teal darken-2" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo" name="logo">Máquinas</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
+        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
+        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
+        <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar Tarefas</a></li>
+        
+        <li><a href="/logout" >Logout</a></li>
+      </ul>
+
+    </div>
+  </nav>
+</body>
+</html>

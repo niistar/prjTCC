@@ -6,6 +6,12 @@ var Tarefa = require ('../models/tarefa.js');
 // app/routes.js
 module.exports = function(app, passport) {
 
+    app.get('/template', function(req, res, next) {
+        res.render('template.ejs',{
+
+        user:req.user});
+    });
+
     app.get('/adicionarMaquina', isLoggedIn, function(req, res, next) {
         res.render('adicionarMaquina.ejs',{
 
