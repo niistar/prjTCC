@@ -12,6 +12,12 @@ module.exports = function(app, passport) {
         user:req.user});
     });
 
+    app.get('/teste', function(req, res, next) {
+        res.render('testemplate.ejs',{
+
+        user:req.user});
+    });
+
     app.get('/adicionarMaquina', isLoggedIn, function(req, res, next) {
         res.render('adicionarMaquina.ejs',{
 

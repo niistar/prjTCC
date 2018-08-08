@@ -26,6 +26,7 @@ mongoose.connect(configDB.url); // connect to our database
 require('./config/passport')(passport); // pass passport for configuration
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/views'));
+app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
