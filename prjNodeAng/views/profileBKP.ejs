@@ -1,0 +1,119 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
+      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--<title>Node Authentication</title>-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        /*body        { padding-top:80px; word-wrap:break-word; }*/
+        .material-icons, .icon-text {
+      vertical-align: middle;
+    }
+        nav ul a{
+            font-size: 18px;
+        }
+        nav ul a:hover{
+            color:#fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+   
+<nav class="orange darken-4" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="http://imgur.com/a/mG9js" >Máquinas</a>
+      
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
+        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
+        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
+        <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar tarefas</a></li>
+        <li><a href="/logout" >Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      
+      <h1 class="header orange-text">Meu Perfil</h1>
+      <br>
+
+    </div>
+  </div>
+
+    
+<div class="container">
+
+        <!-- LOCAL INFORMATION -->
+       
+                <h3><span class="fa fa-user"></span> <%= user.nome %></h3><br><br>
+
+                    <p>
+                        <i class="small material-icons">mail</i>
+                        <strong class="vertical-align: middle" style="font-size:16px">E-mail</strong>: <%= user.email %><br><br>
+                        <i class="small material-icons">picture_in_picture</i>
+                        <strong class="vertical-align: middle" style="font-size:16px">Endereço</strong>: <%= user.endereco %><br><br>
+                        <i class="small material-icons">picture_in_picture</i>
+                        <strong class="vertical-align: middle" style="font-size:16px">Cidade</strong>: <%= user.cidade %><br><br>
+                        <i class="small material-icons">picture_in_picture</i>
+                        <!--<strong>password</strong>: <%= user.password %>-->
+                        <strong class="vertical-align: middle" style="font-size:16px">Estado</strong>: <%= user.estado %><br><br>
+                        <i class="small material-icons">picture_in_picture</i>
+                        <strong class="vertical-align: middle" style="font-size:16px">Pais</strong>: <%= user.pais %><br><br>
+                        <i class="small material-icons">contact_phone</i>
+                        <strong class="vertical-align: middle" style="font-size:16px">Telefone</strong>: <%= user.telefone %><br><br>
+                        <i class="small material-icons">contact_phone</i>
+                        <strong class="vertical-align: middle" style="font-size:16px">Celular</strong>: <%= user.celular %><br><br>
+                        <i class="small material-icons">perm_identity</i>
+                        <strong class="vertical-align: middle" style="font-size:16px">CPF</strong>: <%= user.cpf %><br><br>
+                        <i class="small material-icons">perm_identity</i>
+                        <strong class="vertical-align: middle" style="font-size:16px">RG</strong>: <%= user.rg %><br><br>
+                        <i class="small material-icons">perm_identity</i>
+                        <strong class="vertical-align: middle" style="font-size:16px">Data de Nascimento</strong>: <%= user.dataNasc %><br><br>
+                         <td><a class="waves-effect waves-light btn" href="/completarCadastro"><i class="material-icons right">send</i>Editar perfil</a></td>
+                        
+    </div>
+
+
+
+<footer class="page-footer deep-orange darken-4">
+    <% include templateFooter.ejs%>
+  </footer>
+
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script>
+
+<script>
+  var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
+  
+  app.controller('reservaController', ['$scope', '$http', function ($scope, $http) {
+          $scope.quartos = [];
+
+          $scope.func  = function(){
+          $http.get('/users/profile').then(function(response)
+            {
+              $scope.quartos = response.data;
+            });   
+          }
+          
+        $scope.func();
+
+  }])
+</script>
+</body>
+
+
+
+
+
+
+</html>

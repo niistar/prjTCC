@@ -1,119 +1,219 @@
-<!-- views/profile.ejs -->
-<!doctype html>
-<html>
-<head>
-
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
-      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-      
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!--<title>Node Authentication</title>-->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        /*body        { padding-top:80px; word-wrap:break-word; }*/
-        .material-icons, .icon-text {
-      vertical-align: middle;
-    }
-        nav ul a{
-            font-size: 18px;
+<!-- Header -->
+<style>
+        .parallax-container .parallax img{
+            opacity: 1 !important;
+            display: block;
         }
-        nav ul a:hover{
-            color:#fff;
-            text-decoration: none;
+        .text-stroke{
+           /* -webkit-text-stroke: 2px red !important;*/
+            text-shadow: 2px 2px 5px #000000, 0px 0px 5px #000; 
+            /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
         }
-    </style>
-</head>
-<body>
-   
-<nav class="orange darken-4" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="http://imgur.com/a/mG9js" >Máquinas</a>
-      
-      <ul class="right hide-on-med-and-down">
-        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
-        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
-        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
-        <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar tarefas</a></li>
-        <li><a href="/logout" >Logout</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      
-      <h1 class="header orange-text">Meu Perfil</h1>
-      <br>
+        .avatar{
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.49);
+        }
+        .avatarclass{
+            border:4px solid rgba(0, 0, 0, 0.78);
+            border-radius: 500px;
+            -webkit-border-radius: 500px;
+            -moz-border-radius: 500px;
+        }
 
-    </div>
-  </div>
-
+</style>
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../node_modules/sweetalert/lib/sweet-alert.css">
+<link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     
-<div class="container">
+<head>
+    <div class="navbar-fixed">
+    <nav class="grey darken-4" id="navbar1">
+        <div class="nav-wrapper">
+                          <a id="logo-container" href="/" class="brand-logo center" name="logo"><img src="../assets/logold.png" style="width:100px; height: 64px;" alt=""></a>
+                     
+          <ul class="right hide-on-med-and-down">
+            <li class="hoverable" id="btnLogin" ><a href="/login" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 18px;">Login</a></li>
+          </ul>
+          <ul class="left">
+                <li><a data-activates="slide-out" class="my-btn" href="#"><i class="material-icons">menu</i></a></li>
+                <!-- <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
+                <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
+                <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
+                <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar Tarefas</a></li> -->
+              </ul>
+        </div>
+      </nav>
+      </div>
+      <ul id="slide-out" class="sidenav">
+            <li><div class="user-view">
+              <div class="background">
+                <img src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&h=350">
+              </div>
+              <a href="#user"><img class="circle" src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&h=350"></a>
+              <a href="#name"><span class="black-text name effect-4" id="nome_sidebar"><%= user.nome %></span></a>
+              <a href="#email"><span class="black-text email"><%= user.email %></span></a>
+            </div></li>
+            <li><a href="#!" class="waves-effect"><i class="material-icons">cloud</i>Perfil</a></li>
+            <li><a href="/adicionarMaquina" class="waves-effect"><i class="material-icons">build</i>Cadastrar Máquinas</a></li>
+            <li><a href="/escalonar" class="waves-effect"><i class="material-icons">web</i>Escalonar</a></li>
+            <li><a href="/adicionarTarefa" class="waves-effect"><i class="material-icons">volume_up</i>Cadastrar tarefas</a></li>
+            <li><a href="#!">Second Link</a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="subheader">Subheader</a></li>
+            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+          </ul>
+</head>    
+<main>
+      <!-- Content -->
+      <div class="parallax-container center valign-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col s12 white-text">
+            <img src="../assets/background3.jpg" id="avatar1" style="width: 128px;height: 128px;" alt="" class="circle responsive-img avatarclass"> <!-- notice the "circle" class -->
+              <p></p>
+              <h2 class="white-text text-stroke" style="padding-top: 30px" id="nome1">Bom dia, <%= user.nome %></h2>
+              <!-- <p>A modern responsive front-end framework based on Material Design</p>
+              <a href="/signup" class="waves-effect waves-light btn-large teal lighten-2">Cadastre-se</a> -->
+            </div>
+          </div>
+        </div>
+        
+        <div class="parallax"><img src="../assets/background2.jpg"></div>
+      
+      </div>
+      
+      <div class="container">
+        <div class="row">
+           <div class="col m4 s12">
+             <div class="icon-block">
+               <h2 class="center light-blue-text">
+                 <i class="material-icons">flash_on</i>  
+               </h2>
+               <h5 class="center">Speeds up development</h5>
+               <p class="light">
+                 We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.
+               </p>
+             </div>
+             
+           </div>
+           <div class="col m4 s12">
+             <div class="icon-block">
+               <h2 class="center light-blue-text">
+                 <i class="material-icons">group</i>  
+               </h2>
+               <h5 class="center">User Experience Focused</h5>
+               <p class="light">
+                 By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.
+               </p>
+             </div> 
+           </div>
+           <div class="col m4 s12">
+             <div class="icon-block">
+               <h2 class="center light-blue-text">
+                 <i class="material-icons">settings</i>  
+               </h2>
+               <h5 class="center">Easy to work with</h5>
+               <p class="light">
+                 We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.
+               </p>
+             </div> 
+           </div>
+         </div>
+      </div>
+</main>     
+     
+      
+      <!-- Footer -->
+      <footer>
+            <% include templateFooter.ejs%>
+      </footer>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+      
+      <!-- <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script> -->
+      
+      <script src="../public/javascripts/controller.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems, {});
+        });
+        $(document).ready(function(){
+        $('.parallax').parallax();
+        });
+        $('.my-btn').click(function(){
+        $('.sidenav').sidenav('open');
+        });
+        
+        // var d = new Date();
+        // var nome = $('#nome_sidebar').val();
+        // if(d.getHours() > 12 && d.getHours() < 18)
+        // {
+        //     var x = $('#nome1').val();
+        //     x = x.substr(x.indexOf(",") + 1);
+        //     $('#nome1').html("Boa tarde, " + nome);
+            
+        // }
+        // else if(d.getHours() >= 18 && d.getHours() < 6)
+        // {
+        //     var x = $('#nome1').val();
+        //     x = x.substr(x.indexOf(",") + 1);
+        //     $('#nome1').html("Boa noite, " + nome);
+        // }
+        // else
+        // {
+        //     var x = $('#nome1').val();
+        //     x = x.substr(x.indexOf(",") + 1);
+        //     $('#nome1').html("Boa tarde2, " + nome);
+        // }
+        
+        var lastScrollTop = 0;
+        $(window).scroll(function(event){
+        var st = $(this).scrollTop();
+        if (st > lastScrollTop){
+            $('#logo-container').hide();
+            $('#navbar1').removeClass("grey");
+            $('#navbar1').removeClass("darken-4");
+            $('#navbar1').addClass("transparent");
+            $('#btnLogin').addClass("text-stroke");
+            $('.my-btn').addClass("text-stroke");
+            $('#avatar1').addClass("avatar");
+        } else {
+            // upscroll code
+        }
+        lastScrollTop = st;
+        });
 
-        <!-- LOCAL INFORMATION -->
-       
-                <h3><span class="fa fa-user"></span> <%= user.nome %></h3><br><br>
+        $(window).scroll(handleHitTop);
 
-                    <p>
-                        <i class="small material-icons">mail</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">E-mail</strong>: <%= user.email %><br><br>
-                        <i class="small material-icons">picture_in_picture</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">Endereço</strong>: <%= user.endereco %><br><br>
-                        <i class="small material-icons">picture_in_picture</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">Cidade</strong>: <%= user.cidade %><br><br>
-                        <i class="small material-icons">picture_in_picture</i>
-                        <!--<strong>password</strong>: <%= user.password %>-->
-                        <strong class="vertical-align: middle" style="font-size:16px">Estado</strong>: <%= user.estado %><br><br>
-                        <i class="small material-icons">picture_in_picture</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">Pais</strong>: <%= user.pais %><br><br>
-                        <i class="small material-icons">contact_phone</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">Telefone</strong>: <%= user.telefone %><br><br>
-                        <i class="small material-icons">contact_phone</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">Celular</strong>: <%= user.celular %><br><br>
-                        <i class="small material-icons">perm_identity</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">CPF</strong>: <%= user.cpf %><br><br>
-                        <i class="small material-icons">perm_identity</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">RG</strong>: <%= user.rg %><br><br>
-                        <i class="small material-icons">perm_identity</i>
-                        <strong class="vertical-align: middle" style="font-size:16px">Data de Nascimento</strong>: <%= user.dataNasc %><br><br>
-                         <td><a class="waves-effect waves-light btn" href="/completarCadastro"><i class="material-icons right">send</i>Editar perfil</a></td>
-                        
-    </div>
+        function handleHitTop(event) {
+            var currentScrollTopValue = $(this).scrollTop();
 
+            if (handleHitTop.lastTop === undefined) {
+                handleHitTop.lastTop = currentScrollTopValue ;
 
+                return;
+            }
 
-<footer class="page-footer deep-orange darken-4">
-    <% include templateFooter.ejs%>
-  </footer>
+            if (handleHitTop.lastTop == 0 && currentScrollTopValue == 0) {
+                return;
+            }
 
+            handleHitTop.lastTop = currentScrollTopValue;
 
+            if (handleHitTop.lastTop == 0) {
+            $('#logo-container').show();
+            $('#navbar1').removeClass("transparent");
+            $('#navbar1').addClass("grey");
+            $('#navbar1').addClass("darken-4");
+            $('#btnLogin').removeClass("text-stroke");
+            $('.my-btn').removeClass("text-stroke");
+            $('#avatar1').removeClass("avatar");
+            }
+        }
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script>
-
-<script>
-  var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
-  
-  app.controller('reservaController', ['$scope', '$http', function ($scope, $http) {
-          $scope.quartos = [];
-
-          $scope.func  = function(){
-          $http.get('/users/profile').then(function(response)
-            {
-              $scope.quartos = response.data;
-            });   
-          }
-          
-        $scope.func();
-
-  }])
-</script>
-</body>
-
-
-
-
-
-
-</html>
+      </script>

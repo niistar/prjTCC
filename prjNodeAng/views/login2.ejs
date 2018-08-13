@@ -1,0 +1,73 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <script type="text/javascript" src="../javascripts/lib/materialize.js"></script>
+    <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <style>
+        /*body        { padding-top:80px; }*/
+    </style>
+</head>
+<body>
+<nav class="pink darken-2" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Máquinas</a>
+      <ul class="right hide-on-med-and-down">
+        
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+
+  </div>
+
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h1><span class="fa fa-sign-in"></span> Entrar</h1>
+
+    <!-- show any messages that come back with authentication -->
+    <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %>
+
+    <!-- LOGIN FORM -->
+    <form action="/login" method="post" class='input-field'>
+        <div class="form-group">
+            
+            <input type="text" placeholder="email" name="email">
+        </div>
+        <div class="form-group">
+            
+            <input type="password" placeholder="senha" name="password">
+        </div>
+        <!--<a class="waves-effect waves-light btn pink darken-2" type='submit'>Entrar</a>-->
+        <button type="submit" class="btn btn-warning btn-lg">Login</button>
+    </form>
+
+    <hr>
+
+    <p>Não tem uma conta? <a href="/signup">Cadastre-se</a></p>
+    <p>Ou volte para a <a href="/">home</a>.</p>
+<br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+</div>
+<footer class="page-footer pink darken-4">
+    
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

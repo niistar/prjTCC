@@ -11,24 +11,30 @@
   main {
     flex: 1 0 auto;
   }
+  
     
     </style>
 <head>
     <% include template.ejs%>
-    <title>Node Authentication</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 </head>
-<main>
-        
-        <div class="row">
+<main style="background-image: url(../assets/testefundo2.png)">
+      <div class="container">
 
-                <div class="col s4">
+        <div class="row" style="margin-top: 10vh">
+
+                <div class="col s3">
                   <!-- Promo Content 1 goes here -->
                 </div>
-                <div class="col s4">
-                        <h1><span class="fa fa-sign-in"></span> Cadastre-se</h1>
+                
+                <div class="col s6">
+                        <div class="card white" style="opacity: 0.85;">
+                            <div class="card-image">
+                                <img src="../assets/fundo2.png" style="height: 50%"/>
+                            </div>
+                            <div class="card-content">
 
                         <!-- show any messages that come back with authentication -->
                         <% if (message.length > 0) { %>
@@ -36,30 +42,44 @@
                         <% } %>
                 
                     <!-- LOGIN FORM -->
-                        <form action="/signup" method="post" class='input-field'>
-                            <div class="form-group">
-                                <!-- <input type="text" placeholder="email" name="email"> -->
-                                <div class="input-field">
-                                    <input id="email" type="email" class="validate">
-                                    <label for="email">Email</label>
-                                </div>
+                    
+                                <form action="/signup" method="post" class='input-field'>
+                                    <div class="form-group">
+                                        <!-- <input type="text" placeholder="email" name="email"> -->
+                                        <div class="input-field">
+                                            <input id="email" type="text" class="validate" name="email">
+                                            <label for="email">Email</label>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="form-group">
+                                        <!-- <input type="password" placeholder="senha" name="password"> -->
+                                        <div class="input-field">
+                                            <input id="password" type="password" class="validate" name="password">
+                                            <label for="password">Senha</label>
+                                        </div>
+                                    </div>
+                                    <!-- <a class="waves-effect waves-light btn grey darken-4" type='submit'>Cadastrar</a> -->
+                                    <button type="submit" class="btn btn-warning btn-lg" style="background-color: rgb(50, 50, 50)">Entrar</button>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <input type="password" placeholder="senha" name="password">
+                            <div class="card-action">
+                                <a href="/login">Já tem cadastro?</a>
                             </div>
-                        <!--<a class="waves-effect waves-light btn pink darken-2" type='submit'>Cadastrar</a>-->
-                            <button type="submit" class="btn btn-warning btn-lg">Cadastrar</button>
-                        </form>
+                    </div>
                 </div>
-                <div class="col s4">
+
+                <div class="col s3">
                   <!-- Promo Content 3 goes here -->
                 </div>
           
         </div>
+    </div>  
+</main>
 <footer>
         <% include templateFooter.ejs%>
   </footer>
-</main>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <!-- <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+   <title>Máquinas & Escalonamento</title>
+
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
+      <link rel="stylesheet" type="text/css" href="../node_modules/sweetalert/lib/sweet-alert.css">
+      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--<title>Node Authentication</title>-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        /*body        { padding-top:80px; word-wrap:break-word; }*/
+        .material-icons, .icon-text {
+      vertical-align: middle;
+    }
+        nav ul a{
+            font-size: 18px;
+        }
+        nav ul a:hover{
+            color:#fff;
+            text-decoration: none;
+        }
+        html{
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        #logo-container a:hover{
+            color:#fff !important;
+            text-decoration: none !important;
+        }
+        ul li a:hover{
+            text-decoration: none;
+        }
+        body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        }
+        main {
+          flex: 1 0 auto;
+        }
+        
+        
+        .logout-btn{
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+              }
+
+    </style>
+
+<head>
+<div class="navbar-fixed">  
+<nav class="transparent" role="navigation">
+    <div class="nav-wrapper">
+      <a id="logo-container" href="/" class="brand-logo center" name="logo"><img src="../assets/logold.png" style="width:100px; height: 64px;" alt=""></a>
+      
+
+      <ul class="left">
+        <li><a data-activates="slide-out" class="my-btn" href="#"><i class="material-icons">menu</i></a></li>
+        <!-- <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
+        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
+        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
+        <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar Tarefas</a></li> -->
+      </ul> 
+      <ul class="right">
+        <li><a href="/logout" class="logout-btn">Logout</a></li>
+      </ul>
+
+    </div>
+  </nav>
+  </div>
+  <ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      <div class="background">
+        <img src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&h=350">
+      </div>
+      <a href="#user"><img class="circle" src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&h=350"></a>
+      <a href="#name"><span class="black-text name effect-4"><%= user.nome %></span></a>
+      <a href="#email"><span class="black-text email"><%= user.email %></span></a>
+    </div></li>
+    <li><a href="#!" class="waves-effect"><i class="material-icons">cloud</i>Perfil</a></li>
+    <li><a href="/adicionarMaquina" class="waves-effect"><i class="material-icons">build</i>Cadastrar Máquinas</a></li>
+    <li><a href="/escalonar" class="waves-effect"><i class="material-icons">web</i>Escalonar</a></li>
+    <li><a href="/adicionarTarefa" class="waves-effect"><i class="material-icons">volume_up</i>Cadastrar tarefas</a></li>
+    <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
+    <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
+    <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar Tarefas</a></li>
+    <li><a href="#!">Second Link</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+  </ul>
+  <!-- <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+</head>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col s2"></div>
+            <div class="col s8">
+                
+            </div>
+            <div class="col s2"></div>
+
+        </div>
+        
+    </div>
+</main>
+
+
+<footer>
+        <% include templatefooter.ejs%>
+</footer>
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="../public/javascripts/controller.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {});
+  });
+// $(document).ready(function(){
+//     $('.sidenav').sidenav();
+//   });
+//   $('.sidenav').close();
+
+  $('.my-btn').click(function(){
+    $('.sidenav').sidenav('open');
+  });
+
+</script>
+</html>
