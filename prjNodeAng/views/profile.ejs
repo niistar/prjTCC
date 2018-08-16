@@ -18,6 +18,28 @@
             -webkit-border-radius: 500px;
             -moz-border-radius: 500px;
         }
+        .inline{
+          vertical-align: bottom;font-size: 18px;
+        }
+        #editPerfil, #perfilCompleto{
+          color:black;
+          font-size: 90%;
+        }
+        #editPerfil:hover, #perfilcompleto:hover{
+          color: rgba(0, 0, 0, 0.5);
+          text-decoration: underline;
+          font-size: 90%;
+        }
+        .center-modal {
+          display: flex;
+        }
+        .center-modal .modal {
+          position: relative;
+          width: auto;
+        }
+
+        .modal { width: 30% !important ; height: 100% !important ; }
+
 
 </style>
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -71,7 +93,7 @@
             <div class="col s12 white-text">
             <img src="../assets/background3.jpg" id="avatar1" style="width: 128px;height: 128px;" alt="" class="circle responsive-img avatarclass"> <!-- notice the "circle" class -->
               <p></p>
-              <h2 class="white-text text-stroke" style="padding-top: 30px" id="nome1">Bom dia, <%= user.nome %></h2>
+              <h2 class="white-text text-stroke" style="padding-top: 30px" id="nome1"><%= user.nome %></h2>
               <!-- <p>A modern responsive front-end framework based on Material Design</p>
               <a href="/signup" class="waves-effect waves-light btn-large teal lighten-2">Cadastre-se</a> -->
             </div>
@@ -84,30 +106,80 @@
       
       <div class="container">
         <div class="row">
-           <div class="col m4 s12">
+
+           <div class="col m5 s12">
              <div class="icon-block">
-               <h2 class="center light-blue-text">
-                 <i class="material-icons">flash_on</i>  
+               <h2 class="center black-text">
+                 <i class="material-icons">build</i>  
                </h2>
-               <h5 class="center">Speeds up development</h5>
-               <p class="light">
-                 We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.
-               </p>
-             </div>
-             
-           </div>
-           <div class="col m4 s12">
-             <div class="icon-block">
-               <h2 class="center light-blue-text">
-                 <i class="material-icons">group</i>  
-               </h2>
-               <h5 class="center">User Experience Focused</h5>
-               <p class="light">
-                 By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.
-               </p>
+               <h5 class="center">Escalonamento hoje</h5>
+               <div class="divider"></div>
+               <div class="center">
+                  <!-- Dropdown Trigger -->
+                  <a class='dropdown-trigger black-text' href='#' data-target='dropdown1'>Turno 1</a>
+                  <i class="material-icons dropdown-trigger" data-target="dropdown1" style="vertical-align: bottom;font-size: 20px;cursor: pointer;">keyboard_arrow_down</i> 
+                  <!-- Dropdown Structure -->
+                  <ul id='dropdown1' class='dropdown-content'>
+                    <li><a href="#!" class="black-text">Turno 2</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a href="#!" class="black-text">Turno 3</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                  </ul>
+              </div>
+               <table class="highlight centered responsive-table">
+                  <thead>
+                    <tr>
+                        <th>Máquina</th>
+                        <th>Tarefa</th>
+                    </tr>
+                  </thead>
+          
+                  <tbody>
+                    <tr>
+                      <td>Empacotadora</td>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <td>Cortadora</td>
+                      <td>3</td>
+                    </tr>
+                    <tr>
+                      <td>Caldeira</td>
+                      <td>2</td>
+                    </tr>
+                  </tbody>
+                </table>
              </div> 
            </div>
-           <div class="col m4 s12">
+           <div class="col m2 s12"></div>
+           <div class="col m5 s12">
+             <div class="container">
+              <div class="icon-block">
+                <h2 class="center black-text">
+                  <i class="material-icons">tag_faces</i>  
+                </h2>
+                <h5 class="center">Meus dados</h5>
+                <div class="divider"></div><br/>
+                <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">account_circle</i>  
+                <span><%= user.nome %></span><br/><br/>
+                <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">account_circle</i>  
+                <span><%= user.endereco %></span><br/><br/>
+                <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">account_circle</i>  
+                <span><%= user.dataNasc %></span><br/><br/>
+                <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">call</i> 
+               <span><%= user.telefone %></span><br/><br/>
+               <div class="divider"></div><br/>
+               <div class="left">
+                <a href="#modal1" class="modal-trigger" style="text-transform: uppercase" id="perfilCompleto">Perfil Completo</a>
+               </div>
+               <div class="right">
+                <a href="/completarCadastro" style="text-transform: uppercase" id="editPerfil">Editar perfil ></a>
+               </div>
+              </div> 
+             </div>
+           </div>
+
+           <!-- <div class="col m3 s12">
              <div class="icon-block">
                <h2 class="center light-blue-text">
                  <i class="material-icons">settings</i>  
@@ -118,7 +190,34 @@
                </p>
              </div> 
            </div>
-         </div>
+         </div> -->
+      </div>
+      <div>
+            <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+          <img class="responsive-img" src="../assets/background2.jpg" style="height: 40%; width: 100%; margin-top: -10px; margin-bottom: -125px"/>
+          <img class="circle responsive-img z-depth-4 avatarclass" src="../assets/background3.jpg" style="width: 64px; height: 64px; position: relative; left: 40%; margin-bottom: 45px"/>
+        <div class="modal-content">
+          <div class="divider"></div>
+          <div class="container">
+            <br/>
+              <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">account_circle</i>  
+              <span><%= user.nome %></span><br/><br/>
+              <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">account_circle</i>  
+              <span><%= user.endereco %></span><br/><br/>
+              <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">account_circle</i>  
+              <span><%= user.dataNasc %></span><br/><br/>
+              <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">call</i> 
+             <span><%= user.telefone %></span><br/><br/>
+
+          </div>
+        </div>
+<!--  
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div> -->
+        </div>
+      </div>
       </div>
 </main>     
      
@@ -142,6 +241,22 @@
         var elems = document.querySelectorAll('.sidenav');
         var instances = M.Sidenav.init(elems, {});
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems, {alignment:"center", hover:true});
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, {});
+        });
+
+
+      $('.dropdown-trigger-alt').click(function(){
+
+      });
+
         $(document).ready(function(){
         $('.parallax').parallax();
         });
@@ -149,27 +264,20 @@
         $('.sidenav').sidenav('open');
         });
         
-        // var d = new Date();
-        // var nome = $('#nome_sidebar').val();
-        // if(d.getHours() > 12 && d.getHours() < 18)
-        // {
-        //     var x = $('#nome1').val();
-        //     x = x.substr(x.indexOf(",") + 1);
-        //     $('#nome1').html("Boa tarde, " + nome);
-            
-        // }
-        // else if(d.getHours() >= 18 && d.getHours() < 6)
-        // {
-        //     var x = $('#nome1').val();
-        //     x = x.substr(x.indexOf(",") + 1);
-        //     $('#nome1').html("Boa noite, " + nome);
-        // }
-        // else
-        // {
-        //     var x = $('#nome1').val();
-        //     x = x.substr(x.indexOf(",") + 1);
-        //     $('#nome1').html("Boa tarde2, " + nome);
-        // }
+        var d = new Date();
+        var nome1 = $('#nome1').html();
+        if(d.getHours() > 12 && d.getHours() < 18)
+        {
+            $('#nome1').html("Boa tarde, " + nome1 + "!");   
+        }
+        else if(d.getHours() >= 18 && d.getHours() < 6)
+        {
+            $('#nome1').html("Boa noite, " + nome1 + "!");
+        }
+        else
+        {
+            $('#nome1').html("Bom dia, " + nome1 + "!");
+        }
         
         var lastScrollTop = 0;
         $(window).scroll(function(event){
