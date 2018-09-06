@@ -1,209 +1,240 @@
 <!-- views/profile.ejs -->
+<style>
+    label {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    }
+</style>
 <!doctype html>
 <html>
+
 <head>
+    <% include template.ejs%>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <!-- load bootstrap css -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <!-- load fontawesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
-      <link rel="stylesheet" type="text/css" href="../node_modules/sweetalert/lib/sweet-alert.css">
-      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-      
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!--<title>Node Authentication</title>-->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        /*body        { padding-top:80px; word-wrap:break-word; }*/
-        .material-icons, .icon-text {
-      vertical-align: middle;
-    }
-        nav ul a{
-            font-size: 18px;
-        }
-        nav ul a:hover{
-            color:#fff;
-            text-decoration: none;
-        }
-        html{
-          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
-    </style>
 </head>
-<body ng-app="myApp" ng-controller='quartoController'>
-   
-<nav class="orange darken-4" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Máquinas</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
-        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
-        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
-        <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar tarefas</a></li>
-        <li><a href="/logout" >Logout</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="section no-pad-bot" id="index-banner">
+<main ng-app="myApp" ng-controller='quartoController'>
+
+
     <div class="container">
-      
-      <h1 class="header orange-text">Perfil</h1>
-      <br>
-
+        <h4 style="text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Complete seu cadastro</h4>
+        <form>
+            <div class="row">
+                <div class="col s6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input type="text" ng-model="nome" id="nome" />
+                        <label for="nome" class="active">Nome</label>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input type="text" ng-model="sobrenome" id="sobrenome" />
+                        <label for="sobrenome" class="active">Sobrenome</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s9">
+                    <div class="input-field">
+                        <i class="material-icons prefix">event_note</i>
+                        <input type='text' ng-model='rua' id='rua' />
+                        <label for="rua">Rua</label>
+                    </div>
+                </div>
+                <div class="col s2 offset-s1">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">filter_7</i>
+                        <input type='number' ng-model='numero' id='numero' />
+                        <label for="numero">Número</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">place</i>
+                        <input type='text' ng-model='cidade' id='cidade' />
+                        <label for="cidade">Cidade</label>
+                    </div>
+                </div>
+                <div class="col s2 offset-s1">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">place</i>
+                        <input type='text' ng-model='estado' id='estado' />
+                        <label for="estado">Estado</label>
+                    </div>
+                </div>
+                <div class="col s4 offset-s1">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">place</i>
+                        <input type='number' ng-model='cep' id='cep' />
+                        <label for="cep">CEP</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">calendar_today</i>
+                        <input type='date' ng-model='dataNasc' id='dataNasc' />
+                        <label for="dataNasc">Data de nascimento</label>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">local_phone</i>
+                        <input type='number' ng-model='telefone' id='telefone' />
+                        <label for="telefone">Telefone</label>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">local_phone</i>
+                        <input type='number' ng-model='celular' id='celular' />
+                        <label for="celular">Celular</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field">
+                        <a class="btn waves-effect waves-black" value='salvar' type='submit' ng-click="completarCadastro()" style="background-color: #fff; color:#000">
+                        <i class="material-icons right">send</i>Confirmar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s2">
+                    <a href="/profile">Voltar</a>
+                </div>
+            </div>
+                        
+            
+        </form>
     </div>
-  </div>
-
-    
-<div class="container">
-  <form>
-    <div class='input-field col s6'>
-    <section>
-      <div>
-      <input type='text' ng-model='nome' id='nome' /><br><br>
-      <label for="nome">Nome</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='text' ng-model='sobrenome' id='sobrenome'/><br><br>
-      <label for="sobrenome">Sobrenome</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='text' ng-model='rua' id='rua'/><br><br>
-      <label for="rua">Rua</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='number' ng-model='numero' id='numero'/><br><br>
-      <label for="numero">Número</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='text' ng-model='cidade' id='cidade'/><br><br>
-      <label for="cidade">Cidade</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='text' ng-model='estado' id='estado'/><br><br>
-      <label for="estado">Estado</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='text' ng-model='pais' id='pais'/><br><br>
-      <label for="pais">País</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='number' ng-model='cep' id='cep'/><br><br>
-      <label for="cep">CEP</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='number' ng-model='cpf' id='cpf'/><br><br>
-      <label for="cpf">CPF</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='number' ng-model='rg' id='rg'/><br><br>
-      <label for="rg">RG</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='number' ng-model='telefone' id='telefone'/><br><br>
-      <label for="telefone">Telefone</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='number' ng-model='celular' id='celular'/><br><br>
-      <label for="celular">Celular</label>
-      </div>
-      <div class='input-field col s6'>
-      <input type='date' ng-model='dataNasc' id='dataNasc'/><br><br>
-      <label for="dataNasc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data de nascimento</label>
-      </div>
-
-      <!--<input type='submit' value='salvar' ng-click="adicionarQuarto()"/>-->
-      <td><a class="btn waves-effect waves-orange" value='salvar' type='submit' ng-click="completarCadastro()" style="background-color: #fff; color:#000"><i class="material-icons right">send</i>Confirmar</a></td>
-      </form>
-    </section>
-</div>
-</div>
+</main>
+<footer>
+        <% include templateFooter.ejs%>
+</footer>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
 
 
-<footer class="page-footer orange darken-4">
-    <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-      </div>
-    </div>
-  </footer>
+
+<!--<script src="../public/javascripts/controller.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script>
-  <!--<script src="../public/javascripts/controller.js"></script>-->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
-  <script src="../node_modules/sweetalert/lib/sweet-alert.js"></script>
-  <script src="../node_modules/angular-sweetalert/SweetAlert.js"></script>
-  <script src="../bower_components/ngSweetalert/SweetAlert.min.js"></script>
+<script>
+    var app = angular.module('myApp', ['ngRoute', 'ngResource']);
 
-  <script>
-  var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
-  
-  app.controller('quartoController', ['$scope', '$http', function ($scope, $http, $location) {
-          $scope.completarCadastro = function () {
-          $scope.perfil = [];
+    app.controller('quartoController', ['$scope', '$http', '$window', '$timeout', function ($scope, $http, $window, $timeout) {
+        $scope.completarCadastro = function () {
+            $scope.perfil = [];
 
             var data = ({
-                nome : $scope.nome,
-                sobrenome : $scope.sobrenome,
-                rua : $scope.rua,
-                numero : $scope.numero,
-                cidade : $scope.cidade,
-                estado : $scope.estado,
-                pais : $scope.pais,
-                email : $scope.email,
-                telefone : $scope.telefone,
-                celular : $scope.celular,
-                cpf : $scope.cpf,
-                cep : $scope.cep,
-                rg : $scope.rg,
-                dataNasc : $scope.dataNasc,
+                nome: $scope.nome,
+                sobrenome: $scope.sobrenome,
+                rua: $scope.rua,
+                numero: $scope.numero,
+                cidade: $scope.cidade,
+                estado: $scope.estado,
+                pais: $scope.pais,
+                email: $scope.email,
+                telefone: $scope.telefone,
+                celular: $scope.celular,
+                cpf: $scope.cpf,
+                cep: $scope.cep,
+                rg: $scope.rg,
+                dataNasc: $scope.dataNasc,
             });
             console.log(data);
-              
 
-          $http.post('users/completarCadastro', data).then(function (response) {
-          }, function (response) {
-          console.log("erro");
 
-          
-        });
-        swal("Cadastro atualizado com sucesso!");
-    };
-        $scope.func  = function(){
-          $http.get('/users/completarCadastro').then(function(response)
-            {
+            $http.post('users/completarCadastro', data).then(function (response) {
+            }, function (response) {
+                console.log("erro");
+
+
+            });
+            swal({
+                title:"Cadastro atualizado com sucesso!",
+                icon:"success"
+            });
+            $timeout(function(){
+                $window.location.href = '/profile';
+            }, 1500);
+            
+            
+        };
+        $scope.func = function () {
+            $http.get('/users/completarCadastro').then(function (response) {
                 console.log(response.data);
                 $scope.perfil = response.data;
                 $scope.nome = $scope.perfil.nome,
-                $scope.sobrenome = $scope.perfil.sobrenome,
-                $scope.rua = $scope.perfil.rua,
-                $scope.numero = $scope.perfil.numero,
-                $scope.cidade = $scope.perfil.cidade,
-                $scope.estado = $scope.perfil.estado,
-                $scope.pais = $scope.perfil.pais,
-                $scope.email = $scope.perfil.email,
-                $scope.telefone = $scope.perfil.telefone,
-                $scope.celular = $scope.perfil.celular,
-                $scope.cpf = $scope.perfil.cpf,
-                $scope.cep = $scope.perfil.cep,
-                $scope.rg = $scope.perfil.rg,
-                $scope.dataNasc = $scope.perfil.datanasc,
-                $scope.saldo = $scope.perfil.saldo
-            });   
-          }
-          
+                    $scope.sobrenome = $scope.perfil.sobrenome,
+                    $scope.rua = $scope.perfil.rua,
+                    $scope.numero = $scope.perfil.numero,
+                    $scope.cidade = $scope.perfil.cidade,
+                    $scope.estado = $scope.perfil.estado,
+                    $scope.pais = $scope.perfil.pais,
+                    $scope.email = $scope.perfil.email,
+                    $scope.telefone = $scope.perfil.telefone,
+                    $scope.celular = $scope.perfil.celular,
+                    $scope.cpf = $scope.perfil.cpf,
+                    $scope.cep = $scope.perfil.cep,
+                    $scope.rg = $scope.perfil.rg,
+                    $scope.dataNasc = $scope.perfil.datanasc,
+                    $scope.saldo = $scope.perfil.saldo
+            });
+        }
+
         $scope.func();
 
 
-  }])
-  
-  
-  </script>
 
-</body>
+    }])
+
+
+
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        M.updateTextFields();
+        $('label').addClass('active');
+    });
+
+    window.onload = function () {
+        M.updateTextFields();
+        $('label').addClass('active');
+    }
+
+
+        // window.onload = function(){
+        //     M.updateTextFields();
+        //     $('input').each(function(){
+        //         console.log($(this).val());
+        //         if($(this).val().length > 0)
+        //         {
+        //             $('label').addClass('active');
+        //         }
+        //     });
+
+        // }
+</script>
 
 
 
