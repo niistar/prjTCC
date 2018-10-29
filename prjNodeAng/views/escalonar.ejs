@@ -1,195 +1,209 @@
 <!-- views/profile.ejs -->
+<style>
+    label {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    }
+</style>
 <!doctype html>
 <html>
+
 <head>
+    <% include template.ejs%>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <!-- load bootstrap css -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <!-- load fontawesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
-      <link rel="stylesheet" type="text/css" href="../node_modules/sweetalert/lib/sweet-alert.css">      
-      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-      
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!--<title>Node Authentication</title>-->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    
-    <style>
-        /*body        { padding-top:80px; word-wrap:break-word; }*/
-        .material-icons, .icon-text {
-      vertical-align: middle;
-    }
-        nav ul a{
-            font-size: 18px;
-        }
-        nav ul a:hover{
-            color:#fff;
-            text-decoration: none;
-        }
-        html{
-          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
-    </style>
 </head>
-<body ng-app="myApp" ng-controller='reservaController'>
-   
-<nav class="teal darken-2" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" >Máquinas</a>
-      <ul class="right hide-on-med-and-down">
-       <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
-        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
-        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
-        <li><a href="/adicionarReserva" style="font-size:18px">Reservar Máquinas</a></li>
-        <li><a href="/logout" >Logout</a></li>
-      </ul>
+<main ng-app="myApp" ng-controller='quartoController'>
 
-    </div>
-  </nav>
-  <div class="section no-pad-bot" id="index-banner">
+
     <div class="container">
-      
-      <h1 class="header teal-text">Escalonar</h1>
-
+        <h4 style="text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Complete seu cadastro</h4>
+        <form>
+            <div class="row">
+                <div class="col s6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input type="text" ng-model="nome" id="nome" />
+                        <label for="nome" class="active">Nome</label>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="input-field">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input type="text" ng-model="sobrenome" id="sobrenome" />
+                        <label for="sobrenome" class="active">Sobrenome</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s9">
+                    <div class="input-field">
+                        <i class="material-icons prefix">event_note</i>
+                        <input type='text' ng-model='rua' id='rua' />
+                        <label for="rua">Rua</label>
+                    </div>
+                </div>
+                <div class="col s2 offset-s1">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">filter_7</i>
+                        <input type='number' ng-model='numero' id='numero' />
+                        <label for="numero">Número</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">place</i>
+                        <input type='text' ng-model='cidade' id='cidade' />
+                        <label for="cidade">Cidade</label>
+                    </div>
+                </div>
+                <div class="col s2 offset-s1">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">place</i>
+                        <input type='text' ng-model='estado' id='estado' />
+                        <label for="estado">Estado</label>
+                    </div>
+                </div>
+                <div class="col s4 offset-s1">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">place</i>
+                        <input type='number' ng-model='cep' id='cep' />
+                        <label for="cep">CEP</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">calendar_today</i>
+                        <input type='date' ng-model='dataNasc' id='dataNasc' />
+                        <label for="dataNasc">Data de nascimento</label>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">local_phone</i>
+                        <input type='number' ng-model='telefone' id='telefone' />
+                        <label for="telefone">Telefone</label>
+                    </div>
+                </div>
+                <div class="col s4">
+                    <div class="input-field">
+                        <i class="material-icons prefix" style="font-size: 25px">local_phone</i>
+                        <input type='number' ng-model='celular' id='celular' />
+                        <label for="celular">Celular</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field">
+                        <a class="btn waves-effect waves-black" value='salvar' type='submit' ng-click="completarCadastro()" style="background-color: #fff; color:#000">
+                        <i class="material-icons right">send</i>Confirmar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s2">
+                    <a href="/profile">Voltar</a>
+                </div>
+            </div>
+                        
+            
+        </form>
     </div>
-  </div>
+</main>
+<footer>
+        <% include templateFooter.ejs%>
+</footer>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
+
+
+
+<!--<script src="../public/javascripts/controller.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+<script>
+    var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
     
-<div class="container">
-    <section>
-    <h1 class="header teal-text">Tarefas disponíveis</h1>
-    <table class="highlight">
-      <tr>
-        <th>Nome da tarefa</th>
-        <th>Horas necessárias para a tarefa</th>
-      </tr>
-      <tr ng-repeat="tarefa in tarefas">
-        <td>{{tarefa.nomeTarefa}}</td>
-        <td>{{tarefa.horasNecessarias}}</td>
-      </tr>
-    </table></form>
-    </section>
-</div>
-
-<div class="container">
-  <section>
-  <h1 class="header teal-text">Máquinas</h1>
-  <table class="highlight">
-    <tr>
-      <th>Nome</th>
-      <th>Modelo</th>
-      <th>Capacidade</th>
-      <th>Tipo</th>
-      <th>Observações</th>
-      <th>Status</th>
-    </tr>
-    <tr ng-repeat="maquina in maquinas">
-      <td>{{maquina.nomeMaquina}}</td>
-      <td>{{maquina.modeloMaquina}}</td>
-      <td>{{maquina.capacidadeHoras}}</td>
-      <td>{{maquina.tipoMaquina}}</td>
-      <td>{{maquina.observacoesMaquina}}</td>
-      <td>{{maquina.statusMaquina}}</td>
-    </tr>
-  </table></form>
-  </section>
-  <div>
-    <td><a class="waves-effect waves-light btn" value='escalonar' type='submit' ng-click="escalonar()"><i class="material-icons right">edit</i>Escalonar</a></td>
-  </div>
-</div>
-
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<footer class="page-footer teal darken-4">
-    
-    <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-      </div>
-    </div>
-  </footer>
-
-
-
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script>
-  <!--<script src="../public/javascripts/controller.js"></script>-->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
-  <script src="../node_modules/sweetalert/lib/sweet-alert.js"></script>
-  <script src="../node_modules/angular-sweetalert/SweetAlert.js"></script>
-  <script src="../bower_components/ngSweetalert/SweetAlert.min.js"></script>
-
-  <script>
-  var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
+    app.controller('reservaController', ['$scope', '$http', function ($scope, $http) {
+            $scope.maquinas = [];
+            $scope.tarefas = [];
+            $scope.func  = function(){
+              $http.get('/users/adicionarMaquina').then(function(response)
+              {
+                $scope.maquinas = response.data;
+              });  
+            
+            $http.get('/users/adicionarTarefa').then(function(response)
+              {
+                $scope.tarefas = response.data;
+              });   
+            }
+            $scope.escalonar = function(){
+              swal({
+                title: "O resultado do seu escalonamento",
+                imageUrl: "http://www.castan.pt/castan/wp-content/uploads/2014/07/img-teste-01.jpg",
+                imageSize: '250x250'
   
-  app.controller('reservaController', ['$scope', '$http', function ($scope, $http) {
-          $scope.maquinas = [];
-          $scope.tarefas = [];
-          $scope.func  = function(){
-            $http.get('/users/adicionarMaquina').then(function(response)
-            {
-              $scope.maquinas = response.data;
-            });  
-          
-          $http.get('/users/adicionarTarefa').then(function(response)
-            {
-              $scope.tarefas = response.data;
-            });   
+              })
+            
           }
-          $scope.escalonar = function(){
-            swal({
-              title: "O resultado do seu escalonamento",
-              imageUrl: "http://www.castan.pt/castan/wp-content/uploads/2014/07/img-teste-01.jpg",
-              imageSize: '250x250'
-
-            })
-          
-        }
-        //   $scope.encerrar = function(quarto){
-        //     swal({
-        //     title: "Encerrar sua reserva?",
-        //     text: "Isso não poderá ser desfeito e você terá que deixar seu quarto - Não se esqueça de avaliar sua estadia!",
-        //     type: "warning",
-        //     showCancelButton: true,
-        //     confirmButtonColor: "#DD6B55",
-        //     confirmButtonText: "Confirmar",
-        //     closeOnConfirm: false}, 
-        //     function(){ 
-        //         var data = ({
-        //             _id: quarto._id,
-        //             titulo: $scope.titulo,
-        //             rua: $scope.rua,
-        //             numero: $scope.numero,
-        //             cidade: $scope.cidade,
-        //             estado: $scope.estado,
-        //             preco: quarto.preco,
-        //             data_inicio: $scope.data_inicio,
-        //             data_fim: $scope.data_fim,
-                    
-        //         });
-
-        //     console.log($scope.starRating1);
-
-        //     $http.post('/users/encerrarReserva/', data).then(function (response) {
-                
-        //   }, function (response) {
-        //   console.log("erro");
-        // });
-        // swal("Sua reserva foi cancelada com sucesso!");
-        // $scope.func();
-        //     }
-        //     );
-
-        //   }
-        $scope.func();
-        
-
-  }])//script
+          //   $scope.encerrar = function(quarto){
+          //     swal({
+          //     title: "Encerrar sua reserva?",
+          //     text: "Isso não poderá ser desfeito e você terá que deixar seu quarto - Não se esqueça de avaliar sua estadia!",
+          //     type: "warning",
+          //     showCancelButton: true,
+          //     confirmButtonColor: "#DD6B55",
+          //     confirmButtonText: "Confirmar",
+          //     closeOnConfirm: false}, 
+          //     function(){ 
+          //         var data = ({
+          //             _id: quarto._id,
+          //             titulo: $scope.titulo,
+          //             rua: $scope.rua,
+          //             numero: $scope.numero,
+          //             cidade: $scope.cidade,
+          //             estado: $scope.estado,
+          //             preco: quarto.preco,
+          //             data_inicio: $scope.data_inicio,
+          //             data_fim: $scope.data_fim,
+                      
+          //         });
   
-  </script>
-
-</body>
+          //     console.log($scope.starRating1);
+  
+          //     $http.post('/users/encerrarReserva/', data).then(function (response) {
+                  
+          //   }, function (response) {
+          //   console.log("erro");
+          // });
+          // swal("Sua reserva foi cancelada com sucesso!");
+          // $scope.func();
+          //     }
+          //     );
+  
+          //   }
+          $scope.func();
+          
+  
+    }])//script
+    
+    </script>
 
 
 

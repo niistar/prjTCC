@@ -1,173 +1,124 @@
 <!-- views/profile.ejs -->
+<style>
+    label {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    }
+</style>
 <!doctype html>
 <html>
+
 <head>
+    <% include template.ejs%>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <!-- load bootstrap css -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        <!-- load fontawesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="../stylesheets/lib/materialize.min.css"  media="screen,projection"/>
-      <link rel="stylesheet" type="text/css" href="../node_modules/sweetalert/lib/sweet-alert.css">
-      <link href="../stylesheets/lib//materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-      
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!--<title>Node Authentication</title>-->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        /*body        { padding-top:80px; word-wrap:break-word; }*/
-        .material-icons, .icon-text {
-      vertical-align: middle;
-    }
-        nav ul a{
-            font-size: 18px;
-        }
-        nav ul a:hover{
-            color:#fff;
-            text-decoration: none;
-        }
-        html{
-          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
-    </style>
 </head>
-<body ng-app="myApp" ng-controller='reservaController'>
-   
-<nav class="teal darken-2" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Máquinas</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="/profile" style="font-size:18px">Olá, <%= user.nome %></a></li>
-        <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
-        <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
-        <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar tarefas</a></li>
+<main ng-app="myApp" ng-controller='tarefaController'>
 
-        <li><a href="/logout" >Logout</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="section no-pad-bot" id="index-banner">
+
     <div class="container">
-      
-      <h1 class="header teal-text"></h1>
+        <h4 style="text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Cadastro de Tarefas</h4>
+        <form>
+            <div class="row">
+                <div class="col s8">
+                    <div class="input-field">
+                        <i class="material-icons prefix">calendar_today</i>
+                        <input type="text" ng-model="nome" id="nome" />
+                        <label for="nome" class="active">Nome da Tarefa</label>
+                    </div>
+                </div>
+                <div class="col s3 offset-s1">
+                    <div class="input-field">
+                        <i class="material-icons prefix">timer</i>
+                        <input type="number" ng-model="tempo" id="tempo" />
+                        <label for="tempo" class="active">Tempo da Tarefa</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field">
+                        <a class="btn waves-effect waves-black" value='salvar' type='submit' ng-click="adicionarTarefa()" style="background-color: #fff; color:#000">
+                            <i class="material-icons right">send</i>Confirmar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s2">
+                    <a href="/profile">Voltar</a>
+                </div>
+            </div>
 
+
+        </form>
     </div>
-  </div>
-
-    
-<div class="container">
-    <section>
-    <h1 class="header teal-text">Cadastrar uma nova tarefa</h1>
-    <br><br><form name='formReserva'>
-  <div class='input-field col s6'>
-    <br>
-  <input type='text' name='nome_tar' ng-model='nome_tar' required/><br><br>
-  <label for="nome_tar">Nome da tarefa</label>
-  </div>
-  <div class='input-field col s6'><br>
-  <input type='number' name='horas_tar' ng-model='horas_tar' required /><br><br>
-  <label for="horas_tar">Horas necessárias para a tarefa</label>
-  </div>
-
-  <a class="waves-effect waves-light btn" value='salvar' type='submit' ng-click="adicionarTarefa()"><i class="material-icons right">send</i>Adicionar</a>
-    <table class="highlight">
-  <tr>
-    <th>Nome da tarefa</th>
-    <th>Horas necessárias para a tarefa</th>
-  </tr>
-  <tr ng-repeat="tarefa in tarefas">
-    <td>{{tarefa.nomeTarefa}}</td>
-    <td>{{tarefa.horasNecessarias}}</td>
-    <td><a class="waves-effect waves-light btn" value='editar' type='submit' ng-click="deletarTarefa(tarefa)"><i class="material-icons right">edit</i>Remover</a></td>
-  </tr>
-</table></form>
-
-    </section>
-</div>
-
-<br/><br/><br/><br/><br/>
-
-<footer class="page-footer teal darken-4">
-    <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-      </div>
-    </div>
-  </footer>
+</main>
+<footer>
+    <% include templateFooter.ejs%>
+</footer>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
 
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
-  <script src="../node_modules/sweetalert/lib/sweet-alert.js"></script>
-  <script src="../node_modules/angular-sweetalert/SweetAlert.js"></script>
-  <script src="../bower_components/ngSweetalert/SweetAlert.min.js"></script>
 
-  <script>
-  var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
-  
-  app.controller('reservaController', ['$scope', '$http', 'SweetAlert', function ($scope, $http) {
-          $scope.tarefas = [];
-
-          $scope.func  = function(){
-          $http.get('/users/adicionarTarefa').then(function(response)
-            {
-              $scope.tarefas = response.data;
-            });   
-          }
-          $scope.adicionarTarefa = function(){
-            swal({
-            title: "Adicionar tarefa?",
-            text: "O valor da reserva será debitado do seu saldo!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Confirmar",
-            closeOnConfirm: false}, 
-          function(){ 
-            var data = ({
-                nomeTarefa: $scope.nome_tar,
-                horasNecessarias: $scope.horas_tar
-            });
-            console.log(data);
-
-            $http.post('/users/adicionarTarefa/', data).then(function (response) {
-          }, function (response) {
-          console.log("erro");
-          });
-          swal("Parabéns! Você criou uma tarefa! ");
-          $scope.func();
-          $scope.nome_tar = null;
-          $scope.horas_tar = null;
-          }
-            )};
+<!--<script src="../public/javascripts/controller.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-            $scope.deletarTarefa = function(tarefa){
+
+<script>
+    var app = angular.module('myApp', ['ngRoute', 'ngResource']);
+
+    app.controller('tarefaController', ['$scope', '$http', function ($scope, $http) {
+        $scope.tarefas = [];
+
+        $scope.adicionarTarefa = function () {
+                var data = ({
+                    nomeTarefa: $scope.nome,
+                    horasNecessarias: $scope.tempo
+                });
+                console.log(data);
+
+                $http.post('/users/adicionarTarefa/', data).then(function (response) {
+                }, function (response) {
+                    console.log("erro");
+                });
+                swal("Parabéns! Você criou uma tarefa! ");
+                $scope.nome = null;
+                $scope.tempo = null;
+            
+        };
+
+/*
+        $scope.deletarTarefa = function (tarefa) {
             var data = ({
                 nomeTarefa: tarefa.nomeTarefa,
-                horasNecessarias: tarefa.horasNecessarias
+                horasTarefa: tarefa.tempo
 
             });
             console.log(data);
-          $http.post('users/deletarTarefa', data).then(function (response) {
+            $http.post('users/deletarTarefa', data).then(function (response) {
+                $scope.func();
+            }, function (response) {
+                console.log("erro");
+
+            });
             $scope.func();
-          }, function (response) {
-          console.log("erro");
-          
-        });
-        $scope.func();
         };
-        $scope.func();
+        $scope.func(); */
 
-  }])
-  
-  
-  </script>
-
-</body>
+    }])
 
 
+</script>
 
 
 

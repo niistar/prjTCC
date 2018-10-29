@@ -7,7 +7,7 @@ var tarefaSchema = new mongoose.Schema({
         
         //_id: Number,
         nomeTarefa: String,
-        horasNecessarias: Number
+        horasTarefa: Number
         // titulo : String,
         // rua : String,
         // numero : Number,

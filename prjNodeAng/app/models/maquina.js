@@ -7,11 +7,12 @@ var maquinaSchema = new mongoose.Schema({
         
         //_id: Number,
         nomeMaquina: String,
-        capacidadeHoras: Number,
+      //  capacidadeHoras: Number,
         tipoMaquina: String,
         modeloMaquina: String,
         observacoesMaquina: String,
         statusMaquina: String,
+        serialMaquina: Number,
         // titulo : String,
         // rua : String,
         // numero : Number,
