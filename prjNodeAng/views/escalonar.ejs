@@ -16,27 +16,47 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
 </head>
-<main ng-app="myApp" ng-controller='quartoController'>
-
+<main ng-app="myApp" ng-controller='escalonarController'>
 
     <div class="container">
-        <h4 style="text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Complete seu cadastro</h4>
+        <div class="row" style="margin-top: 10px"></div>
         <form>
             <div class="row">
-                <div class="col s6">
-                    <div class="input-field">
-                        <i class="material-icons prefix">account_circle</i>
-                        <input type="text" ng-model="nome" id="nome" />
-                        <label for="nome" class="active">Nome</label>
+                <h5 style="text-align: left; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Selecione as máquinas desejadas</h4>
+                    <div class="col s12">
+                        <!-- <select multiple>
+                                <option value="" disabled selected>Choose your option</option>
+                                <option ng-repeat="tarefa in tarefas" value="{{tarefa.nomeTarefa}}">{{tarefa.nomeTarefa}}</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                        </select>
+                              <label>Materialize Select</label> ideia do select-->
+                        <table class="highlight responsive-table center">
+                            <tr>
+                                <th>Nome da Máquina</th>
+                                <th>Tipo da Máquina</th>
+                                <th>Modelo da Máquina</th>
+                                <th>Número Serial</th>
+                                <th>Status</th>
+                                <th>Observações</th>
+                            </tr>
+                            <tr ng-repeat="maquina in maquinas">
+                                <td>{{maquina.nomeMaquina}}</td>
+                                <td>{{maquina.tipoMaquina}}</td>
+                                <td>{{maquina.modeloMaquina}}</td>
+                                <td>{{maquina.observacoesMaquina}}</td>
+                                <td>{{maquina.statusMaquina}}</td>
+                                <td>{{maquina.serialMaquina}}</td>
+                            </tr>
+                        </table>
                     </div>
-                </div>
-                <div class="col s6">
-                    <div class="input-field">
-                        <i class="material-icons prefix">account_circle</i>
-                        <input type="text" ng-model="sobrenome" id="sobrenome" />
-                        <label for="sobrenome" class="active">Sobrenome</label>
+                    <div class="col s6">
+                        <div class="input-field">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input type="text" ng-model="sobrenome" id="sobrenome" />
+                            <label for="sobrenome" class="active">Sobrenome</label>
+                        </div>
                     </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col s9">
@@ -104,7 +124,7 @@
                 <div class="col s12">
                     <div class="input-field">
                         <a class="btn waves-effect waves-black" value='salvar' type='submit' ng-click="completarCadastro()" style="background-color: #fff; color:#000">
-                        <i class="material-icons right">send</i>Confirmar</a>
+                            <i class="material-icons right">send</i>Confirmar</a>
                     </div>
                 </div>
             </div>
@@ -113,13 +133,13 @@
                     <a href="/profile">Voltar</a>
                 </div>
             </div>
-                        
-            
+
+
         </form>
     </div>
 </main>
 <footer>
-        <% include templateFooter.ejs%>
+    <% include templateFooter.ejs%>
 </footer>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <!-- <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script> -->
@@ -134,76 +154,66 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems, {});
+    });
+</script>
 
 <script>
-    var app = angular.module('myApp', ['ngRoute', 'ngResource', 'oitozero.ngSweetAlert']);
-    
-    app.controller('reservaController', ['$scope', '$http', function ($scope, $http) {
-            $scope.maquinas = [];
-            $scope.tarefas = [];
-            $scope.func  = function(){
-              $http.get('/users/adicionarMaquina').then(function(response)
-              {
+    var app = angular.module('myApp', ['ngRoute', 'ngResource']);
+
+    app.controller('escalonarController', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
+        $scope.maquinas = [];
+        $scope.tarefas = [];
+        $scope.func = function () {
+            $http.get('/users/adicionarMaquina').then(function (response) {
                 $scope.maquinas = response.data;
-              });  
-            
-            $http.get('/users/adicionarTarefa').then(function(response)
-              {
+                console.log(response.data);
+            });
+
+            $http.get('/users/adicionarTarefa').then(function (response) {
                 $scope.tarefas = response.data;
-              });   
-            }
-            $scope.escalonar = function(){
-              swal({
+            });
+        }
+        $scope.escalonar = function () {
+            swal({
                 title: "O resultado do seu escalonamento",
                 imageUrl: "http://www.castan.pt/castan/wp-content/uploads/2014/07/img-teste-01.jpg",
                 imageSize: '250x250'
-  
-              })
-            
-          }
-          //   $scope.encerrar = function(quarto){
-          //     swal({
-          //     title: "Encerrar sua reserva?",
-          //     text: "Isso não poderá ser desfeito e você terá que deixar seu quarto - Não se esqueça de avaliar sua estadia!",
-          //     type: "warning",
-          //     showCancelButton: true,
-          //     confirmButtonColor: "#DD6B55",
-          //     confirmButtonText: "Confirmar",
-          //     closeOnConfirm: false}, 
-          //     function(){ 
-          //         var data = ({
-          //             _id: quarto._id,
-          //             titulo: $scope.titulo,
-          //             rua: $scope.rua,
-          //             numero: $scope.numero,
-          //             cidade: $scope.cidade,
-          //             estado: $scope.estado,
-          //             preco: quarto.preco,
-          //             data_inicio: $scope.data_inicio,
-          //             data_fim: $scope.data_fim,
-                      
-          //         });
-  
-          //     console.log($scope.starRating1);
-  
-          //     $http.post('/users/encerrarReserva/', data).then(function (response) {
-                  
-          //   }, function (response) {
-          //   console.log("erro");
-          // });
-          // swal("Sua reserva foi cancelada com sucesso!");
-          // $scope.func();
-          //     }
-          //     );
-  
-          //   }
-          $scope.func();
-          
-  
+
+            })
+
+        }
+
+        $scope.func();
+
+        //           function init() {
+        //     self.dialCodes = [
+        //         {   "name": "United States",
+        //             "dial_code": "+1",
+        //             "code": "US"
+        //         }, {
+        //             "name": "India",
+        //             "dial_code": "+91",
+        //             "code": "IN"
+        //         }, {
+        //             "name": "United Kingdom",
+        //             "dial_code": "+44",
+        //             "code": "GB"
+        //        }];
+
+        //      $timeout(function () {
+        //         $('select').formSelect()
+        //      });
+        // };
+        // init();caso queira utilizar o select
+
+
     }])//script
-    
-    </script>
+
+</script>
 
 
 

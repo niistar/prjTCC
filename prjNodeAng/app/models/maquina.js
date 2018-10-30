@@ -12,7 +12,7 @@ var maquinaSchema = new mongoose.Schema({
         modeloMaquina: String,
         observacoesMaquina: String,
         statusMaquina: String,
-        serialMaquina: Number,
+        serialMaquina: Number
         // titulo : String,
         // rua : String,
         // numero : Number,
@@ -24,12 +24,12 @@ var maquinaSchema = new mongoose.Schema({
         // numero_aval : Number,
         // media_aval : Number,
         // reservado : Boolean,
-        data_inicio: Date,
-        data_fim: Date,
+        //data_inicio: Date,
+       // data_fim: Date,
 
 
         // dono : [{ type: String, ref: 'User' }] ,
-        usuariosMaquina : [{ type: String, ref: 'User' }] ,
+       // usuariosMaquina : [{ type: String, ref: 'User' }] ,
         
 });
 
