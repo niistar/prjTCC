@@ -1,6 +1,7 @@
 from random import randint, random, shuffle, sample, choice
 from itertools import permutations
 from pprint import pprint
+from statistics import mean
 #Classes
 class Individual:
   def __init__(self, machines):
@@ -39,7 +40,7 @@ def population():
     task1 = Task('T1', 10, 0, 0, 0)
     task2 = Task('T2', 15, 2, 1, 0)
     task3 = Task('T3', 8, 0, 0, 0)
-    task4 = Task('T4', 18, 0, 0, 0)
+    task4 = Task('T4', 18, 1, 0, 0)
     task5 = Task('T5', 20, 0, 0, 0)
     tasks1 = [task1, task2, task3, task4, task5]
     tasks2 = [task1, task2, task3, task4, task5]
@@ -105,7 +106,7 @@ def permutation(individuals):
   new_individuals = []
   menor = 1000000000000
   new_list = []
-  for j in range(20):
+  for j in range(100):
     new_individual = []
     new_individuals = []
     individuals_random = sample(individuals, 3)
@@ -194,7 +195,7 @@ def permutation(individuals):
     new_individual = Individual(new_individuals)
 
     x = randint(0, 1000)
-    if x <= 10:
+    if x <= 150:
         while True:
             maq1 = randint(0, len(new_individual._machines)-1)
             maq2 = randint(0, len(new_individual._machines)-1)
@@ -225,14 +226,21 @@ menor = 0
 ciclos = 0
 s = 0
 #print('chegou')
-for i in range (20):
+for i in range (100):
   x = population()
   individuals.append(x)
 
 while counter < 10 or ciclos < 40000:
-  for i in range(20):
+  for i in range(100):
       fitness(individuals[i])
-  response = min(individuals, key = lambda x: x._fit)
+  response = max(individuals, key = lambda x: x._fit)
+  response2 = min(individuals, key = lambda x: x._fit)
+  media = []
+
+  for j in range(len(individuals)):
+    media.append(individuals[j]._fit)
+
+
   menor = response._fit
   if(menor < controle):
     controle = menor
@@ -241,7 +249,13 @@ while counter < 10 or ciclos < 40000:
   ciclos += 1
   individuals = permutation(individuals)
   s = 1
-  print(response._fit)
+
+
+ 
+
+  print('media: ' + str(mean(media)))
+  print('maior: ' + str(response._fit))
+  print('menor: ' + str(response2._fit))
 
 # for i in range(len(response._machines)):
 #     for j in range(len(response._machines[i]._tasks)):
