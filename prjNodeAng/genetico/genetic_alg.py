@@ -2,6 +2,8 @@ from random import randint, random, shuffle, sample, choice
 from itertools import permutations
 from pprint import pprint
 from statistics import mean
+import collections
+from copy import copy, deepcopy
 #Classes
 class Individual:
   def __init__(self, machines):
@@ -32,21 +34,46 @@ class Task:
     self._nexttask = nexttask
   def __str__(self):
     return '{}-{}-{}-{}-{}'.format(self._name, self._time, self._order, self._forcedorder, self._nexttask)
+  def __eq__(self, other):
+    return self.__dict__ == other.__dict__
+  def __hash__(self):
+    return id(self)
+  def __deepcopy__(self, memo): # memo is a dict of id's to copies
+        id_self = id(self)        # memoization avoids unnecesary recursion
+        _copy = memo.get(id_self)
+        if _copy is None:
+            _copy = type(self)(
+                deepcopy(self._name, memo), 
+                deepcopy(self._time, memo),
+                deepcopy(self._order, memo),
+                deepcopy(self._forcedorder, memo),
+                deepcopy(self._nexttask, memo))
+            memo[id_self] = _copy 
+        return _copy
+
 
 #Métodos
 
 #Método de criação de indivíduo
 def population():
-    task1 = Task('T1', 10, 0, 0, 0)
-    task2 = Task('T2', 15, 2, 1, 0)
-    task3 = Task('T3', 8, 0, 0, 0)
-    task4 = Task('T4', 18, 1, 0, 0)
-    task5 = Task('T5', 20, 0, 0, 0)
-    tasks1 = [task1, task2, task3, task4, task5]
-    tasks2 = [task1, task2, task3, task4, task5]
-    tasks3 = [task1, task2, task3, task4, task5]
-    tasks4 = [task1, task2, task3, task4, task5]
-    tasks5 = [task1, task2, task3, task4, task5]
+    task1 = Task('T1', 40, 0, 0, 0)
+    task2 = Task('T2', 18, 0, 0, 0)
+    task3 = Task('T3', 31, 2, 1, 0)
+    task4 = Task('T4', 7, 0, 0, 0)
+    task5 = Task('T5', 22, 0, 0, 0)
+    task6 = Task('T6', 4, 0, 0, 0)
+    task7 = Task('T7', 11, 0, 0, 0)
+    task8 = Task('T8', 26, 5, 1, 0)
+    task9 = Task('T9', 50, 0, 0, 0)
+    task10 = Task('T10', 8, 0, 0, 0)
+
+
+    tasks1 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
+    tasks2 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
+    tasks3 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
+    tasks4 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
+    tasks5 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
+
     shuffle(tasks1)
     machine1 = Machine('Caldeira', tasks1)
     shuffle(tasks2)
@@ -95,9 +122,12 @@ def fitness (individual):
 
             elif l == j and individual._machines[k]._tasks[l]._time == individual._machines[i]._tasks[j]._time and total2 <= total:
               individual._fit += individual._machines[i]._tasks[j]._time  
+            
+            elif l > j and individual._machines[k]._tasks[l]._time == individual._machines[i]._tasks[j]._time and total + individual._machines[i]._tasks[j]._time > total2:
+              individual._fit += (total + individual._machines[i]._tasks[j]._time) - total2
         total2 = 0
               
-    individual._fit += individual._machines[i]._tasks[j]._time
+    individual._fit += total
     #print(individual._fit)
     total = 0
 
@@ -106,9 +136,10 @@ def permutation(individuals):
   new_individuals = []
   menor = 1000000000000
   new_list = []
-  for j in range(100):
+  for j in range(1000):
     new_individual = []
     new_individuals = []
+    menor = 1000000000000
     individuals_random = sample(individuals, 3)
     #minor_1 = [ l for l in individuals_random if l[-1] == min([ fit[-1] for fit in individuals_random._fit ]) ][0]
     for i in range(3):
@@ -161,7 +192,92 @@ def permutation(individuals):
             menor = lista[i]._fit
 
 
-    #minor_2 = [ l for l in individuals_random if l[-1] == min([ fit[-1] for fit in individuals_random ]) ][0]
+    # for i in range(len(minor_1._machines)):
+    #   if i == 0:
+    #     quant = round((len(minor_1._machines))*0.6)
+    #     ran = sample(range(1, len(minor_1._machines)-1), quant)
+    #     new_individuals.append(minor_2._machines[i])
+    #     for j in range(len(ran)):
+    #       index = ran[j]
+    #       new_individuals[i]._tasks[index] = deepcopy(minor_1._machines[i]._tasks[index])
+
+    #     dif = []
+    #     eq = []
+
+    #     for j in range(len(new_individuals[i]._tasks)):
+    #       for k in range(len(new_individuals[i]._tasks)):
+    #         if minor_1._machines[i]._tasks[j]._time == new_individuals[i]._tasks[k]._time:
+    #           break
+    #         elif k == len(new_individuals[i]._tasks)-1:
+    #           dif.append(j)
+
+    #     for j in range(len(new_individuals[i]._tasks)):
+    #       for k in range(len(new_individuals[i]._tasks)):
+    #         if new_individuals[i]._tasks[j]._time == new_individuals[i]._tasks[k]._time and j != k and j < k and k not in eq:
+    #           eq.append(k)
+    #     for j in range(len(dif)):
+    #       ind = eq[j]
+    #       ind2 = dif[j]
+    #       new_individuals[i]._tasks[ind] = minor_1._machines[i]._tasks[ind2]
+
+
+
+    #   elif i % 2 == 1:
+    #     if i == 0:
+    #       quant = round((len(minor_1._machines))*0.6)
+    #       ran = sample(range(len(minor_2._machines)-1), quant)
+    #       new_individuals.append(minor_1._machines[i])
+    #       for j in range(len(ran)):
+    #         index = ran[j]
+    #         new_individuals[i]._tasks[index] = deepcopy(minor_2._machines[i]._tasks[index])
+
+    #       dif = []
+    #       eq = []
+
+    #       for j in range(len(new_individuals[i]._tasks)):
+    #         for k in range(len(new_individuals[i]._tasks)):
+    #           if minor_1._machines[i]._tasks[j]._time == new_individuals[i]._tasks[k]._time:
+    #             break
+    #           elif k == len(new_individuals[i]._tasks)-1:
+    #             dif.append(j)
+
+    #       for j in range(len(new_individuals[i]._tasks)):
+    #         for k in range(len(new_individuals[i]._tasks)):
+    #           if new_individuals[i]._tasks[j]._time == new_individuals[i]._tasks[k]._time and j != k and j < k and k not in eq:
+    #             eq.append(k)
+    #       for j in range(len(dif)):
+    #         ind = eq[j]
+    #         ind2 = dif[j]
+    #         new_individuals[i]._tasks[ind] = minor_2._machines[i]._tasks[ind2]
+
+    #   else:
+    #     if i == 0:
+    #       quant = round((len(minor_1._machines))*0.6)
+    #       ran = sample(range(len(minor_1._machines)-1), quant)
+    #       new_individuals.append(minor_2._machines[i])
+    #       for j in range(len(ran)):
+    #         index = ran[j]
+    #         new_individuals[i]._tasks[index] = deepcopy(minor_1._machines[i]._tasks[index])
+
+    #       dif = []
+    #       eq = []
+
+    #       for j in range(len(new_individuals[i]._tasks)):
+    #         for k in range(len(new_individuals[i]._tasks)):
+    #           if minor_1._machines[i]._tasks[j]._time == new_individuals[i]._tasks[k]._time:
+    #             break
+    #           elif k == len(new_individuals[i]._tasks)-1:
+    #             dif.append(j)
+
+    #       for j in range(len(new_individuals[i]._tasks)):
+    #         for k in range(len(new_individuals[i]._tasks)):
+    #           if new_individuals[i]._tasks[j]._time == new_individuals[i]._tasks[k]._time and j != k and j < k and k not in eq:
+    #             eq.append(k)
+    #       for j in range(len(dif)):
+    #         ind = eq[j]
+    #         ind2 = dif[j]
+    #         new_individuals[i]._tasks[ind] = minor_1._machines[i]._tasks[ind2]
+
 
     for i in range(len(minor_1._machines)):
       if i == 0:
@@ -195,7 +311,7 @@ def permutation(individuals):
     new_individual = Individual(new_individuals)
 
     x = randint(0, 1000)
-    if x <= 150:
+    if x < 10:
         while True:
             maq1 = randint(0, len(new_individual._machines)-1)
             maq2 = randint(0, len(new_individual._machines)-1)
@@ -214,6 +330,10 @@ def permutation(individuals):
               aux[index] = taskAux
         new_individual._machines[maq1]._tasks = new_individual._machines[maq2]._tasks
         new_individual._machines[maq2]._tasks = aux
+    # for o in range(len(new_individual._machines)):
+    #   for p in range(len(new_individual._machines[o]._tasks)):
+    #     tasksss = new_individual._machines[o]._tasks[p]
+    #     print(tasksss)
     new_list.append(new_individual)
 
   return new_list
@@ -224,14 +344,15 @@ controle = 10000000
 counter = 0
 menor = 0
 ciclos = 0
+resposta = []
 s = 0
 #print('chegou')
-for i in range (100):
+for i in range (1000):
   x = population()
   individuals.append(x)
 
-while counter < 10 or ciclos < 40000:
-  for i in range(100):
+while True:
+  for i in range(1000):
       fitness(individuals[i])
   response = max(individuals, key = lambda x: x._fit)
   response2 = min(individuals, key = lambda x: x._fit)
@@ -251,11 +372,35 @@ while counter < 10 or ciclos < 40000:
   s = 1
 
 
- 
+  resposta = [mean(media), response._fit, response2._fit]
+  pprint(resposta)
 
-  print('media: ' + str(mean(media)))
-  print('maior: ' + str(response._fit))
-  print('menor: ' + str(response2._fit))
+  if response._fit == response2._fit:
+    for i in range(len(response._machines[0]._tasks)):
+      print('Maquina 1: ')
+      print(response2._machines[0]._tasks[i])
+      print('\n')
+    for i in range(len(response._machines[0]._tasks)):
+      print('Maquina 2: ')
+      print(response2._machines[1]._tasks[i])
+      print('\n')
+    for i in range(len(response._machines[0]._tasks)):
+      print('Maquina 3: ')
+      print(response2._machines[2]._tasks[i])
+      print('\n')
+    for i in range(len(response._machines[0]._tasks)):
+      print('Maquina 4: ')
+      print(response2._machines[3]._tasks[i])
+      print('\n')
+    for i in range(len(response._machines[0]._tasks)):
+      print('Maquina 5: ')
+      print(response2._machines[4]._tasks[i])
+      print('\n')
+    break
+
+  # print('media: ' + str(mean(media)))
+  # print('maior: ' + str(response._fit))
+  # print('menor: ' + str(response2._fit))
 
 # for i in range(len(response._machines)):
 #     for j in range(len(response._machines[i]._tasks)):

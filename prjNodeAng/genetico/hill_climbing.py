@@ -1,11 +1,20 @@
 from random import randint, random, shuffle, sample, choice
 from itertools import permutations, combinations, combinations_with_replacement
 from pprint import pprint
+from copy import copy, deepcopy
 #Classes
 class Individual:
-  def __init__(self, machines):
-    self._machines = machines
-    self._fit = 0
+    def __init__(self, machines):
+        self._machines = machines
+        self._fit = 0
+    def __deepcopy__(self, memo): # memo is a dict of id's to copies
+        id_self = id(self)        # memoization avoids unnecesary recursion
+        _copy = memo.get(id_self)
+        if _copy is None:
+            _copy = type(self)(
+                deepcopy(self._machines, memo))
+            memo[id_self] = _copy 
+        return _copy
 
 class Machine:
   def __init__(self, name, tasks):
@@ -23,24 +32,43 @@ class Machine:
       self._tasks.append(task)
 
 class Task:
-  def __init__(self, name, time, order, forcedorder, nexttask):
-    self._name = name
-    self._time = time
-    self._order = order
-    self._forcedorder = forcedorder
-    self._nexttask = nexttask
-  def __str__(self):
-    return '{}-{}-{}-{}-{}'.format(self._name, self._time, self._order, self._forcedorder, self._nexttask)
+    def __init__(self, name, time, order, forcedorder, nexttask):
+        self._name = name
+        self._time = time
+        self._order = order
+        self._forcedorder = forcedorder
+        self._nexttask = nexttask
+    def __str__(self):
+        return '{}-{}-{}-{}-{}'.format(self._name, self._time, self._order, self._forcedorder, self._nexttask)
+    def __deepcopy__(self, memo): # memo is a dict of id's to copies
+        id_self = id(self)        # memoization avoids unnecesary recursion
+        _copy = memo.get(id_self)
+        if _copy is None:
+            _copy = type(self)(
+                deepcopy(self._name, memo), 
+                deepcopy(self._time, memo),
+                deepcopy(self._order, memo),
+                deepcopy(self._forcedorder, memo),
+                deepcopy(self._nexttask, memo))
+            memo[id_self] = _copy 
+        return _copy
 
 #Métodos
 
 #Método de criação de indivíduo
 def population():
-    task1 = Task('T1', 10, 0, 0, 0)
-    task2 = Task('T2', 15, 2, 1, 0)
-    task3 = Task('T3', 8, 0, 0, 0)
-    task4 = Task('T4', 18, 0, 0, 0)
-    task5 = Task('T5', 20, 0, 0, 0)
+    task1 = Task('T1', 40, 0, 0, 0)
+    task2 = Task('T2', 18, 0, 0, 0)
+    task3 = Task('T3', 31, 0, 0, 0)
+    task4 = Task('T4', 7, 0, 0, 0)
+    task5 = Task('T5', 22, 0, 0, 0)
+
+    # task6 = Task('T6', 3, 6, 0, 0)
+    # task7 = Task('T7', 17, 0, 0, 0)
+    # task8 = Task('T8', 32, 0, 0, 0)
+    # task9 = Task('T9', 40, 0, 0, 0)
+    # task10 = Task('T10', 6, 0, 0, 0)
+
     tasks1 = [task1, task2, task3, task4, task5]
     tasks2 = [task1, task2, task3, task4, task5]
     tasks3 = [task1, task2, task3, task4, task5]
@@ -65,8 +93,8 @@ def population():
 
 def calcula(individual):
     tasks = []
-    new_individual = individual
-    testind = individual
+    new_individual = deepcopy(individual)
+    testind = deepcopy(individual)
     menor_maq = []
     machine = []
     for subset in permutations(individual._machines[0]._tasks, 5):
@@ -76,7 +104,7 @@ def calcula(individual):
     fit = 0
     menor = 1000000
     testind._fit = 0
-    controle = individual
+    controle = deepcopy(individual)
     controle._fit = 0
     # for i in range (len(testind._machines)):
     #     for j in range(len(testind._machines[i]._tasks)):
@@ -87,6 +115,7 @@ def calcula(individual):
             if j == 0:
                 menor = 1000000
             testind._machines[i]._tasks = tasks[j]
+            testind._fit = controle._fit
             for k in range(len(testind._machines[i]._tasks)):
                 total += testind._machines[i]._tasks[k]._time
                 if i != 0:
@@ -94,11 +123,11 @@ def calcula(individual):
                         for m in range(len(testind._machines[l]._tasks)):
                             total2 += testind._machines[l]._tasks[m]._time
                             if testind._machines[l]._tasks[m] == testind._machines[i]._tasks[k]:
-                                if total2 > total and m < k:
+                                if total2 > total and l < i:
                                     testind._fit += total2 - total
-                                elif m > k and (total + testind._machines[i]._tasks[k]._time) > total2:
-                                    testind._fit += total - total2
-                                if m == k:
+                                elif (total + testind._machines[i]._tasks[k]._time) > total2 and l < i:
+                                    testind._fit += (total + testind._machines[i]._tasks[k]._time) - total2
+                                if m == k and l < i:
                                     testind._fit += testind._machines[i]._tasks[k]._time
                         total2 = 0
                 else:
@@ -106,9 +135,10 @@ def calcula(individual):
 
             if testind._fit < menor:
                 menor = testind._fit
-                new_individual._machines[i]._tasks = testind._machines[i]._tasks
+                new_individual._machines[i]._tasks = deepcopy(testind._machines[i]._tasks)
                 new_individual._fit = testind._fit
-                if i != 0 and k == 5:
+                ite = j
+                if i != 0 and k == 4:
                     new_individual._fit += total
             total = 0
             testind._fit = controle._fit
