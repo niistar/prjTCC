@@ -1,97 +1,96 @@
 <!-- views/profile.ejs -->
 <style>
-    label {
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
-    }
+  label {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  }
 </style>
 <!doctype html>
 <html>
 
 <head>
-    <% include template.ejs%>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-        <!-- load bootstrap css -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-        <!-- load fontawesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <% include template.ejs%>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <!-- load fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
 </head>
 <main ng-app="myApp" ng-controller='maquinaController'>
 
 
-    <div class="container">
-        <h4 style="text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Cadastro de Máquinas</h4>
-        <form>
-            <div class="row">
-                <div class="col s12">
-                    <div class="input-field">
-                        <i class="material-icons prefix">build</i>
-                        <input type="text" ng-model="nome" id="nome" />
-                        <label for="nome" class="active">Nome da Máquina</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s6">
-                    <div class="input-field">
-                        <i class="material-icons prefix">settings</i>
-                        <input type='text' ng-model='tipo' id='tipo' />
-                        <label for="tipo">Tipo da Máquina</label>
-                    </div>
-                </div>
-                <div class="col s6">
-                    <div class="input-field">
-                        <i class="material-icons prefix" style="font-size: 25px">brightness_high</i>
-                        <input type='text' ng-model='modelo' id='modelo' />
-                        <label for="modelo">Modelo da Máquina</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s6">
-                    <div class="input-field">
-                        <i class="material-icons prefix">filter_4</i>
-                        <input type='number' ng-model='serial' id='serial' />
-                        <label for="serial">Número Serial</label>
-                    </div>
-                </div>
-                <div class="col s6">
-                    <div class="input-field">
-                        <i class="material-icons prefix" style="font-size: 25px">toys</i>
-                        <input type='text' ng-model='statusMaquina' id='statusMaquina' />
-                        <label for="status">Status da Máquina</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <div class="input-field">
-                        <i class="material-icons prefix" style="font-size: 25px">notes</i>
-                        <input type='text' ng-model='observacoes' id='observacoes' />
-                        <label for="observacoes">Observações</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <div class="input-field">
-                        <a class="btn waves-effect waves-black" value='salvar' type='submit' ng-click="adicionarMaquina()" style="background-color: #fff; color:#000">
-                            <i class="material-icons right">send</i>Confirmar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s2">
-                    <a href="/profile">Voltar</a>
-                </div>
-            </div>
+  <div class="container">
+    <h4 style="text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Cadastro de Máquinas</h4>
 
-
-        </form>
+    <div class="row">
+      <div class="col s12">
+        <div class="input-field">
+          <i class="material-icons prefix">build</i>
+          <input type="text" ng-model="nome" id="nome" />
+          <label for="nome" class="active">Nome da Máquina</label>
+        </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="col s6">
+        <div class="input-field">
+          <i class="material-icons prefix">settings</i>
+          <input type='text' ng-model='tipo' id='tipo' />
+          <label for="tipo">Tipo da Máquina</label>
+        </div>
+      </div>
+      <div class="col s6">
+        <div class="input-field">
+          <i class="material-icons prefix" style="font-size: 25px">brightness_high</i>
+          <input type='text' ng-model='modelo' id='modelo' />
+          <label for="modelo">Modelo da Máquina</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <div class="input-field">
+          <i class="material-icons prefix">filter_4</i>
+          <input type='number' ng-model='serial' id='serial' />
+          <label for="serial">Número Serial</label>
+        </div>
+      </div>
+      <div class="col s6">
+        <div class="input-field">
+          <i class="material-icons prefix" style="font-size: 25px">toys</i>
+          <input type='text' ng-model='statusMaquina' id='statusMaquina' />
+          <label for="status">Status da Máquina</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <div class="input-field">
+          <i class="material-icons prefix" style="font-size: 25px">notes</i>
+          <input type='text' ng-model='observacoes' id='observacoes' />
+          <label for="observacoes">Observações</label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <div class="input-field">
+          <a class="btn waves-effect waves-black" value='salvar' ng-click="adicionarMaquina()" style="background-color: #fff; color:#000">
+            <i class="material-icons right">send</i>Confirmar</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s2">
+        <a href="/profile">Voltar</a>
+      </div>
+    </div>
+
+
+  </div>
 </main>
 <footer>
-    <% include templateFooter.ejs%>
+  <% include templateFooter.ejs%>
 </footer>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <!-- <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script> -->
@@ -101,80 +100,70 @@
 
 
 <!--<script src="../public/javascripts/controller.js"></script>-->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
 <script>
-    var app = angular.module('myApp', ['ngRoute', 'ngResource']);
+  var app = angular.module('myApp', ['ngRoute', 'ngResource']);
 
-    app.controller('maquinaController', ['$scope', '$http', function ($scope, $http) {
-        $scope.adicionarMaquina = function () {
+  app.controller('maquinaController', ['$scope', '$http', function ($scope, $http) {
+    $scope.adicionarMaquina = function (e) {
 
-                    $scope.maquinas = [];
+      $scope.maquinas = [];
 
-                    var data = ({
-                        nomeMaquina: $scope.nome,
-                        modeloMaquina: $scope.modelo,
-                        tipoMaquina: $scope.tipo,
-                        observacoesMaquina: $scope.observacoes,
-                        statusMaquina: $scope.statusMaquina,
-                        serialMaquina: $scope.serial
-                    });
-                    console.log(data);
+      var data = ({
+        nomeMaquina: $scope.nome,
+        modeloMaquina: $scope.modelo,
+        tipoMaquina: $scope.tipo,
+        observacoesMaquina: $scope.observacoes,
+        statusMaquina: $scope.statusMaquina,
+        serialMaquina: $scope.serial,
+        selected: false
+      });
 
-                    $http.get('/users/adicionarMaquina').then(function (response) {
-                        $scope.maquinas = response.data;
 
-                    });
-
-                    $http.post('users/adicionarMaquina', data).then(function (response) {
-                    }, function (response) {
-                        console.log("erro");
-                    });
-                    swal("A máquina foi adicionada com sucesso!");
-                    $scope.func();
-                    $scope.nome = null,
-                        $scope.modelo = null,
-                        $scope.horas = null,
-                        $scope.tipo = null,
-                        $scope.obs = null,
-                        $scope.status = null
-                    $scope.func();
+      $http.post('users/adicionarMaquina', data).then(function (response) {
+      }, function (response) {
+        console.log("erro");
+      });
+      swal("A máquina foi adicionada com sucesso!");
+      $scope.nome = null,
+        $scope.modelo = null,
+        $scope.observacoes = null,
+        $scope.tipo = null,
+        $scope.observacoes = null,
+        $scope.statusMaquina = null,
+        $scope.serial = null
 
 
 
-        };
-        $scope.func = function () {
-            $http.get('/users/adicionarMaquina').then(function (response) {
-                $scope.maquinas = response.data;
-            });
-        }
 
-        $scope.deletarMaquina = function (maquina) {
-            var data = ({
-                nomeMaquina: maquina.nomeMaquina,
-                modeloMaquina: maquina.modeloMaquina,
-                capacidadeHoras: maquina.capacidadeHoras,
-                tipoMaquina: maquina.tipoMaquina,
-                observacoesMaquina: maquina.observacoesMaquina,
-                statusMaquina: maquina.statusMaquina
-            });
-            console.log(data);
-            $http.post('users/deletarMaquina', data).then(function (response) {
-            }, function (response) {
-                console.log("erro");
+    };
 
-            });
-            $scope.func();
-        };
+    $scope.deletarMaquina = function (maquina) {
+      var data = ({
+        nomeMaquina: maquina.nomeMaquina,
+        modeloMaquina: maquina.modeloMaquina,
+        capacidadeHoras: maquina.capacidadeHoras,
+        tipoMaquina: maquina.tipoMaquina,
+        observacoesMaquina: maquina.observacoesMaquina,
+        statusMaquina: maquina.statusMaquina
+      });
+      console.log(data);
+      $http.post('users/deletarMaquina', data).then(function (response) {
+      }, function (response) {
+        console.log("erro");
 
-        $scope.func();
+      });
+    };
 
-    }])
+
+
+  }])
 
 
 </script>

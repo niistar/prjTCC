@@ -67,9 +67,9 @@
 
 
 <!--<script src="../public/javascripts/controller.js"></script>-->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script> -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
@@ -83,7 +83,10 @@
         $scope.adicionarTarefa = function () {
                 var data = ({
                     nomeTarefa: $scope.nome,
-                    horasNecessarias: $scope.tempo
+                    horasNecessarias: $scope.tempo,
+                    order: 0,
+                    forcedOrder: 0,
+                    nextTask: 0
                 });
                 console.log(data);
 

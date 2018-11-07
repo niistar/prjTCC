@@ -3,15 +3,14 @@ var User = require('./user.js');
 var bcrypt   = require('bcrypt-nodejs');
 
 
-var tarefaSchema = new mongoose.Schema({
+var escalaSchema = new mongoose.Schema({
         
         //_id: Number,
         nomeTarefa: String,
         horasTarefa: Number,
-        order: Number,
-        forcedOrder: Boolean,
-        nextTask: Number,
-        selected : Boolean
+        order : Number,
+        forcedOrder: Number,
+        nextTask: Number
         // titulo : String,
         // rua : String,
         // numero : Number,
@@ -31,4 +30,4 @@ var tarefaSchema = new mongoose.Schema({
         
 });
 
-module.exports = mongoose.model('Tarefa', tarefaSchema);
+module.exports = mongoose.model('Escala', escalaSchema);

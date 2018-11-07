@@ -31,7 +31,7 @@
                                 <option value="3">Option 3</option>
                         </select>
                               <label>Materialize Select</label> ideia do select-->
-                        <table class="highlight responsive-table center">
+                        <table class="highlight responsive-table centered">
                             <tr>
                                 <th>Nome da Máquina</th>
                                 <th>Tipo da Máquina</th>
@@ -39,6 +39,7 @@
                                 <th>Número Serial</th>
                                 <th>Status</th>
                                 <th>Observações</th>
+                                <th>Selecionar</th>
                             </tr>
                             <tr ng-repeat="maquina in maquinas">
                                 <td>{{maquina.nomeMaquina}}</td>
@@ -47,83 +48,45 @@
                                 <td>{{maquina.observacoesMaquina}}</td>
                                 <td>{{maquina.statusMaquina}}</td>
                                 <td>{{maquina.serialMaquina}}</td>
+                                <td><input ng-model="maquina.selected" id="checkbox{{$index}}" type="checkbox"><label for="checkbox{{$index}}"></label></label></td>
                             </tr>
                         </table>
                     </div>
-                    <div class="col s6">
-                        <div class="input-field">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input type="text" ng-model="sobrenome" id="sobrenome" />
-                            <label for="sobrenome" class="active">Sobrenome</label>
-                        </div>
-                    </div>
             </div>
             <div class="row">
-                <div class="col s9">
-                    <div class="input-field">
-                        <i class="material-icons prefix">event_note</i>
-                        <input type='text' ng-model='rua' id='rua' />
-                        <label for="rua">Rua</label>
+                <h5 style="text-align: left; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Selecione as máquinas desejadas</h4>
+                    <div class="col s12">
+                        <!-- <select multiple>
+                                <option value="" disabled selected>Choose your option</option>
+                                <option ng-repeat="tarefa in tarefas" value="{{tarefa.nomeTarefa}}">{{tarefa.nomeTarefa}}</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                        </select>
+                              <label>Materialize Select</label> ideia do select-->
+                        <table class="highlight responsive-table centered">
+                            <tr>
+                                <th>Nome da Tarefa</th>
+                                <th>Tempo da Tarefa</th>
+                                <th>Ordem Prefixada</th>
+                                <th>Ordem Forçada</th>
+                                <th>Tarefa seguinte</th>
+                                <th>Selecionar</th>
+                            </tr>
+                            <tr ng-repeat="tarefa in tarefas">
+                                <td>{{tarefa.nomeTarefa}}</td>
+                                <td>{{tarefa.horasTarefa}}</td>
+                                <td><input ng-model="tarefa.order" type="number"></td>
+                                <td><input ng-model="tarefa.forcedOrder" id="checkbox-forced{{$index}}" type="checkbox"><label for="checkbox-forced{{$index}}"></label></label></td>
+                                <td><input ng-model="tarefa.order" type="number"></td>
+                                <td><input ng-model="tarefa.selected" id="checkbox-next{{$index}}" type="checkbox"><label for="checkbox-next{{$index}}"></label></label></td>
+                            </tr>
+                        </table>
                     </div>
-                </div>
-                <div class="col s2 offset-s1">
-                    <div class="input-field">
-                        <i class="material-icons prefix" style="font-size: 25px">filter_7</i>
-                        <input type='number' ng-model='numero' id='numero' />
-                        <label for="numero">Número</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s4">
-                    <div class="input-field">
-                        <i class="material-icons prefix" style="font-size: 25px">place</i>
-                        <input type='text' ng-model='cidade' id='cidade' />
-                        <label for="cidade">Cidade</label>
-                    </div>
-                </div>
-                <div class="col s2 offset-s1">
-                    <div class="input-field">
-                        <i class="material-icons prefix" style="font-size: 25px">place</i>
-                        <input type='text' ng-model='estado' id='estado' />
-                        <label for="estado">Estado</label>
-                    </div>
-                </div>
-                <div class="col s4 offset-s1">
-                    <div class="input-field">
-                        <i class="material-icons prefix" style="font-size: 25px">place</i>
-                        <input type='number' ng-model='cep' id='cep' />
-                        <label for="cep">CEP</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s4">
-                    <div class="input-field">
-                        <i class="material-icons prefix" style="font-size: 25px">calendar_today</i>
-                        <input type='date' ng-model='dataNasc' id='dataNasc' />
-                        <label for="dataNasc">Data de nascimento</label>
-                    </div>
-                </div>
-                <div class="col s4">
-                    <div class="input-field">
-                        <i class="material-icons prefix" style="font-size: 25px">local_phone</i>
-                        <input type='number' ng-model='telefone' id='telefone' />
-                        <label for="telefone">Telefone</label>
-                    </div>
-                </div>
-                <div class="col s4">
-                    <div class="input-field">
-                        <i class="material-icons prefix" style="font-size: 25px">local_phone</i>
-                        <input type='number' ng-model='celular' id='celular' />
-                        <label for="celular">Celular</label>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col s12">
                     <div class="input-field">
-                        <a class="btn waves-effect waves-black" value='salvar' type='submit' ng-click="completarCadastro()" style="background-color: #fff; color:#000">
+                        <a class="btn waves-effect waves-black" value='salvar' type='submit' ng-click="escalonar(maquina, tarefa)" style="background-color: #fff; color:#000">
                             <i class="material-icons right">send</i>Confirmar</a>
                     </div>
                 </div>
@@ -149,9 +112,9 @@
 
 
 <!--<script src="../public/javascripts/controller.js"></script>-->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script> -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
@@ -167,6 +130,7 @@
     app.controller('escalonarController', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
         $scope.maquinas = [];
         $scope.tarefas = [];
+        var data = [];
         $scope.func = function () {
             $http.get('/users/adicionarMaquina').then(function (response) {
                 $scope.maquinas = response.data;
@@ -177,17 +141,44 @@
                 $scope.tarefas = response.data;
             });
         }
-        $scope.escalonar = function () {
-            swal({
-                title: "O resultado do seu escalonamento",
-                imageUrl: "http://www.castan.pt/castan/wp-content/uploads/2014/07/img-teste-01.jpg",
-                imageSize: '250x250'
+        $scope.escalonar = function (maquina, tarefa) {
 
+            $($scope.maquinas).each(function (){
+                if(this.selected === true)
+                {
+                    data.push(this);
+                } 
             })
+            data.push('//');
+            $($scope.tarefas).each(function (){
+                if(this.selected === true)
+                {
+                    data.push(this);
+                }
+            })
+            
+            data = JSON.stringify(data);
+            console.log(data);
+            data = [];
+            
+            // var data = ({
+            //     nomeMaquina: maquina.nomeMaquina,
+            //     modeloMaquina: maquina.modeloMaquina,
+            //     capacidadeHoras: maquina.capacidadeHoras,
+            //     tipoMaquina: maquina.tipoMaquina,
+            //     observacoesMaquina: maquina.observacoesMaquina,
+            //     statusMaquina: maquina.statusMaquina
+            // });
+            // console.log(data);
+            // $http.post('users/deletarMaquina', data).then(function (response) {
+            // }, function (response) {
+            //     console.log("erro");
+
+            // });
 
         }
 
-        $scope.func();
+  
 
         //           function init() {
         //     self.dialCodes = [

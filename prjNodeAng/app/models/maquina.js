@@ -12,7 +12,8 @@ var maquinaSchema = new mongoose.Schema({
         modeloMaquina: String,
         observacoesMaquina: String,
         statusMaquina: String,
-        serialMaquina: Number
+        serialMaquina: Number,
+        selected : Boolean
         // titulo : String,
         // rua : String,
         // numero : Number,
