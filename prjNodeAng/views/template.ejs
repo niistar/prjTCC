@@ -47,9 +47,20 @@
 
         }
         #nome_perfil, #email_perfil{
-          text-shadow: 2px 2px 5px #000000, 0px 0px 5px #000; 
-          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-          color: #fff;
+          text-shadow: 2px 2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, -2px -2px 0 #000, 2px 0px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 0px -2px 0 #000;
+          /* text-shadow: 0px 0px 20px #000000, 0px 0px 20px #000;  */
+          /* text-shadow: -1px 0 black, 0 1px black, px 0 black, 0 -1px black; */
+          color: #eee!important;
+        }
+
+        .voltar
+        {
+          color:black;
+        }
+        .voltar:hover
+        {
+          text-decoration: none;
+          color:gray;
         }
 
     </style>
@@ -84,10 +95,10 @@
       <a href="#name"><span class="black-text name effect-4" id="nome_perfil"><%= user.nome %></span></a>
       <a href="#email"><span class="black-text email" id="email_perfil"><%= user.email %></span></a>
     </div></li>
-    <li><a href="#!" class="waves-effect"><i class="material-icons">cloud</i>Perfil</a></li>
+    <li><a href="/profile" class="waves-effect"><i class="material-icons">cloud</i>Perfil</a></li>
     <li><a href="/adicionarMaquina" class="waves-effect"><i class="material-icons">build</i>Cadastrar Máquinas</a></li>
     <li><a href="/escalonar" class="waves-effect"><i class="material-icons">web</i>Escalonar</a></li>
-    <li><a href="/adicionarTarefa" class="waves-effect"><i class="material-icons">volume_up</i>Cadastrar tarefas</a></li>
+    <li><a href="/adicionarTarefa" class="waves-effect"><i class="material-icons">add_to_queue</i>Cadastrar tarefas</a></li>
     <!-- <li><a href="/adicionarMaquina" style="font-size:18px">Cadastrar Máquinas</a></li>
     <li><a href="/escalonar" style="font-size:18px">Escalonar</a></li>
     <li><a href="/adicionarTarefa" style="font-size:18px">Cadastrar Tarefas</a></li>

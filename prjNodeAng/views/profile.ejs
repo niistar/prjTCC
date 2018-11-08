@@ -18,6 +18,13 @@
             -webkit-border-radius: 500px;
             -moz-border-radius: 500px;
         }
+
+        .avatarclassSide{
+            border:2px solid rgba(0, 0, 0, 1);
+            border-radius: 500px;
+            -webkit-border-radius: 500px;
+            -moz-border-radius: 500px;
+        }
         .inline{
           vertical-align: bottom;font-size: 18px;
         }
@@ -37,6 +44,12 @@
           position: relative;
           width: auto;
         }
+        #nome_perfil, #email_perfil{
+          text-shadow: 2px 2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, -2px -2px 0 #000, 2px 0px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 0px -2px 0 #000;
+          /* text-shadow: 0px 0px 20px #000000, 0px 0px 20px #000;  */
+          /* text-shadow: -1px 0 black, 0 1px black, px 0 black, 0 -1px black; */
+          color: #eee!important;
+        }
 
         .modal { width: 30% !important ; height: 100% !important ; }
 
@@ -51,10 +64,10 @@
     <div class="navbar-fixed">
     <nav class="grey darken-4" id="navbar1">
         <div class="nav-wrapper">
-                          <a id="logo-container" href="/" class="brand-logo center" name="logo"><img src="../assets/logold.png" style="width:100px; height: 64px;" alt=""></a>
+                          <a id="logo-container" href="/profile" class="brand-logo center" name="logo"><img src="../assets/logold.png" style="width:100px; height: 64px;" alt=""></a>
                      
           <ul class="right hide-on-med-and-down">
-            <li class="hoverable" id="btnLogin" ><a href="/login" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 18px;">Login</a></li>
+            <li class="hoverable" id="btnLogin" ><a href="/" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 18px;">Logout</a></li>
           </ul>
           <ul class="left">
                 <li><a data-activates="slide-out" class="my-btn" href="#"><i class="material-icons">menu</i></a></li>
@@ -71,21 +84,21 @@
               <div class="background">
                 <img src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&h=350">
               </div>
-              <a href="#user"><img class="circle" src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&h=350"></a>
-              <a href="#name"><span class="black-text name effect-4" id="nome_sidebar"><%= user.nome %></span></a>
-              <a href="#email"><span class="black-text email"><%= user.email %></span></a>
+              <a href="#user"><img class="circle avatarclassSide" src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&h=350"></a>
+              <a href="#name"><span class="black-text name effect-4" id="nome_perfil"><%= user.nome %></span></a>
+              <a href="#email"><span class="black-text email" id="email_perfil"><%= user.email %></span></a>
             </div></li>
-            <li><a href="#!" class="waves-effect"><i class="material-icons">cloud</i>Perfil</a></li>
+            <li><a href="/profile" class="waves-effect"><i class="material-icons">cloud</i>Perfil</a></li>
             <li><a href="/adicionarMaquina" class="waves-effect"><i class="material-icons">build</i>Cadastrar Máquinas</a></li>
             <li><a href="/escalonar" class="waves-effect"><i class="material-icons">web</i>Escalonar</a></li>
-            <li><a href="/adicionarTarefa" class="waves-effect"><i class="material-icons">volume_up</i>Cadastrar tarefas</a></li>
-            <li><a href="#!">Second Link</a></li>
+            <li><a href="/adicionarTarefa" class="waves-effect"><i class="material-icons">add_to_queue</i>Cadastrar tarefas</a></li>
+            <!-- <li><a href="#!">Second Link</a></li>
             <li><div class="divider"></div></li>
             <li><a class="subheader">Subheader</a></li>
-            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li> -->
           </ul>
 </head>    
-<main>
+<main ng-app="myApp" ng-controller='quartoController'>
       <!-- Content -->
       <div class="parallax-container center valign-wrapper">
         <div class="container">
@@ -165,7 +178,7 @@
                 <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">account_circle</i>  
                 <span><%= user.rua + ', ' + user.numero %></span><br/><br/>
                 <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">account_circle</i>  
-                <span><%= user.dataNasc %></span><br/><br/>
+                <span id="dataLabel"><%= user.dataNasc %></span><br/><br/>
                 <i class="material-icons" style="vertical-align: bottom;font-size: 20px;">call</i> 
                <span><%= user.telefone %></span><br/><br/>
                <div class="divider"></div><br/>
@@ -222,106 +235,119 @@
 </main>     
      
       
-      <!-- Footer -->
-      <footer>
-            <% include templateFooter.ejs%>
-      </footer>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<!-- Footer -->
+<footer>
+      <% include templateFooter.ejs%>
+</footer>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+<!-- <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script> -->
+
+<script src="../public/javascripts/controller.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+<script type="text/javascript" src="../node_modules/angular-ui-mask/dist/mask.js"></script>
+<script>
+
+
+
+  var app = angular.module('myApp', ['ui.mask','ngRoute', 'ngResource']);
+
+  app.controller('quartoController', ['$scope', '$http', '$window', '$timeout', function ($scope, $http, $window, $timeout) {
       
-      <!-- <script type="text/javascript" src="../javascripts/lib/materialize.min.js"></script> -->
-      
-      <script src="../public/javascripts/controller.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.sidenav');
-        var instances = M.Sidenav.init(elems, {});
-        });
+  }])
 
-        document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.dropdown-trigger');
-        var instances = M.Dropdown.init(elems, {alignment:"center", hover:true});
-        });
+</script>
+  
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.sidenav');
+  var instances = M.Sidenav.init(elems, {});
+  });
 
-        document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.modal');
-        var instances = M.Modal.init(elems, {});
-        });
+  document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.dropdown-trigger');
+  var instances = M.Dropdown.init(elems, {alignment:"center", hover:true});
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.modal');
+  var instances = M.Modal.init(elems, {});
+  });
 
 
-      $('.dropdown-trigger-alt').click(function(){
+$('.dropdown-trigger-alt').click(function(){
 
-      });
+});
 
-        $(document).ready(function(){
-        $('.parallax').parallax();
-        });
-        $('.my-btn').click(function(){
-        $('.sidenav').sidenav('open');
-        });
-        
-        var d = new Date();
-        var nome1 = $('#nome1').html();
-        if(d.getHours() > 12 && d.getHours() < 18)
-        {
-            $('#nome1').html("Boa tarde, " + nome1 + "!");   
-        }
-        else if(d.getHours() >= 18 && d.getHours() < 6)
-        {
-            $('#nome1').html("Boa noite, " + nome1 + "!");
-        }
-        else
-        {
-            $('#nome1').html("Bom dia, " + nome1 + "!");
-        }
-        
-        var lastScrollTop = 0;
-        $(window).scroll(function(event){
-        var st = $(this).scrollTop();
-        if (st > lastScrollTop){
-            $('#logo-container').hide();
-            $('#navbar1').removeClass("grey");
-            $('#navbar1').removeClass("darken-4");
-            $('#navbar1').addClass("transparent");
-            $('#btnLogin').addClass("text-stroke");
-            $('.my-btn').addClass("text-stroke");
-            $('#avatar1').addClass("avatar");
-        } else {
-            // upscroll code
-        }
-        lastScrollTop = st;
-        });
+  $(document).ready(function(){
+  $('.parallax').parallax();
+  });
+  $('.my-btn').click(function(){
+  $('.sidenav').sidenav('open');
+  });
+  
+  var d = new Date();
+  var nome1 = $('#nome1').html();
+  if(d.getHours() > 12 && d.getHours() < 18)
+  {
+      $('#nome1').html("Boa tarde, " + nome1 + "!");   
+  }
+  else if(d.getHours() >= 18 && d.getHours() < 6)
+  {
+      $('#nome1').html("Boa noite, " + nome1 + "!");
+  }
+  else
+  {
+      $('#nome1').html("Bom dia, " + nome1 + "!");
+  }
+  
+  var lastScrollTop = 0;
+  $(window).scroll(function(event){
+  var st = $(this).scrollTop();
+  if (st > lastScrollTop){
+      $('#logo-container').hide();
+      $('#navbar1').removeClass("grey");
+      $('#navbar1').removeClass("darken-4");
+      $('#navbar1').addClass("transparent");
+      $('#btnLogin').addClass("text-stroke");
+      $('.my-btn').addClass("text-stroke");
+      $('#avatar1').addClass("avatar");
+  } else {
+      // upscroll code
+  }
+  lastScrollTop = st;
+  });
 
-        $(window).scroll(handleHitTop);
+  $(window).scroll(handleHitTop);
 
-        function handleHitTop(event) {
-            var currentScrollTopValue = $(this).scrollTop();
+  function handleHitTop(event) {
+      var currentScrollTopValue = $(this).scrollTop();
 
-            if (handleHitTop.lastTop === undefined) {
-                handleHitTop.lastTop = currentScrollTopValue ;
+      if (handleHitTop.lastTop === undefined) {
+          handleHitTop.lastTop = currentScrollTopValue ;
 
-                return;
-            }
+          return;
+      }
 
-            if (handleHitTop.lastTop == 0 && currentScrollTopValue == 0) {
-                return;
-            }
+      if (handleHitTop.lastTop == 0 && currentScrollTopValue == 0) {
+          return;
+      }
 
-            handleHitTop.lastTop = currentScrollTopValue;
+      handleHitTop.lastTop = currentScrollTopValue;
 
-            if (handleHitTop.lastTop == 0) {
-            $('#logo-container').show();
-            $('#navbar1').removeClass("transparent");
-            $('#navbar1').addClass("grey");
-            $('#navbar1').addClass("darken-4");
-            $('#btnLogin').removeClass("text-stroke");
-            $('.my-btn').removeClass("text-stroke");
-            $('#avatar1').removeClass("avatar");
-            }
-        }
+      if (handleHitTop.lastTop == 0) {
+      $('#logo-container').show();
+      $('#navbar1').removeClass("transparent");
+      $('#navbar1').addClass("grey");
+      $('#navbar1').addClass("darken-4");
+      $('#btnLogin').removeClass("text-stroke");
+      $('.my-btn').removeClass("text-stroke");
+      $('#avatar1').removeClass("avatar");
+      }
+  }
 
-      </script>
+</script>

@@ -72,7 +72,7 @@
                 <div class="col s4 offset-s1">
                     <div class="input-field">
                         <i class="material-icons prefix" style="font-size: 25px">place</i>
-                        <input type='number' ng-model='cep' id='cep' />
+                        <input type='text' ng-model='cep' id='cep' ui-mask="99999-999"/>
                         <label for="cep">CEP</label>
                     </div>
                 </div>
@@ -88,14 +88,14 @@
                 <div class="col s4">
                     <div class="input-field">
                         <i class="material-icons prefix" style="font-size: 25px">local_phone</i>
-                        <input type='number' ng-model='telefone' id='telefone' />
+                        <input type='text' ng-model='telefone' id='telefone' ui-mask="(99)9999-9999"/>
                         <label for="telefone">Telefone</label>
                     </div>
                 </div>
                 <div class="col s4">
                     <div class="input-field">
                         <i class="material-icons prefix" style="font-size: 25px">local_phone</i>
-                        <input type='number' ng-model='celular' id='celular' />
+                        <input type='text' ng-model='celular' id='celular' ui-mask="(99)99999-9999"/>
                         <label for="celular">Celular</label>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
             </div>
             <div class="row">
                 <div class="col s2">
-                    <a href="/profile">Voltar</a>
+                    <a class="voltar" href="/profile">Voltar</a>
                 </div>
             </div>
                         
@@ -133,11 +133,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+<script type="text/javascript" src="../node_modules/angular-ui-mask/dist/mask.js"></script>
 
 
 <script>
-    var app = angular.module('myApp', ['ngRoute', 'ngResource']);
+    var app = angular.module('myApp', ['ui.mask','ngRoute', 'ngResource']);
 
     app.controller('quartoController', ['$scope', '$http', '$window', '$timeout', function ($scope, $http, $window, $timeout) {
         $scope.completarCadastro = function () {
