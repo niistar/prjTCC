@@ -77,7 +77,7 @@
                                 <td>{{tarefa.horasTarefa}}</td>
                                 <td><input ng-model="tarefa.order" type="number"></td>
                                 <td><input ng-model="tarefa.forcedOrder" id="checkbox-forced{{$index}}" type="checkbox"><label for="checkbox-forced{{$index}}"></label></label></td>
-                                <td><input ng-model="tarefa.order" type="number"></td>
+                                <td><input ng-model="tarefa.nextTask" type="number"></td>
                                 <td><input ng-model="tarefa.selected" id="checkbox-next{{$index}}" type="checkbox"><label for="checkbox-next{{$index}}"></label></label></td>
                             </tr>
                         </table>
@@ -159,7 +159,12 @@
             })
             
             data = JSON.stringify(data);
-            console.log(data);
+            
+
+            $http.post('users/escalonar', data).then(function (response){
+                console.log(data);
+            });
+    
             data = [];
             
             // var data = ({

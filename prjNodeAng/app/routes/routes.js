@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var User = require('../models/user.js');
 var Maquina = require('../models/maquina.js');
 var Tarefa = require ('../models/tarefa.js');
+var request = require('request');
 
 // app/routes.js
 module.exports = function(app, passport) {
@@ -11,6 +12,22 @@ module.exports = function(app, passport) {
 
         user:req.user});
     });
+
+    
+    app.post('/users/escalonar', isLoggedIn, function(req, res, next) {  
+        console.log(req.body);    
+        request.get('http://127.0.0.1:5000/', function(err, res, body){
+            console.log(res);
+        });
+        
+        // request.post('127.0.0.1:5000/teste', {json: true, body: req.body}, function(err, res, body) {
+        //         console.log('chegou');
+        //         console.log(res);
+        //         console.log(body);
+        //     });
+
+        
+    }); 
 
     app.get('/template', function(req, res, next) {
         res.render('template.ejs',{
@@ -143,6 +160,7 @@ module.exports = function(app, passport) {
             res.json(user);
         });
     });
+
 
 
     // =====================================
