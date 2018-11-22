@@ -27,9 +27,9 @@ def funcao():
         tasks_global.append(json[i])
 
 
-    print(machines_global)
-    print('aa')
-    print(tasks_global)
+    # print(machines_global)
+    # print('aa')
+    # print(tasks_global)
 
   
   #Classes
@@ -85,16 +85,40 @@ def funcao():
   #Método de criação de indivíduo
   def population():
     machines = []
+    tasks_obj = []
+    tasks_aux = []
     for i in range(len(machines_global)):
-      task_nova = deepcopy(tasks_global)
+      task_nova = list(deepcopy(tasks_global))
       shuffle(task_nova)
+      #print(task_nova)
       #print(machines_global[i].name)
-      print('socorro')
-      print(machines_global[i])
-      print('nao aguento mais')
-      #machine_nova = Machine(machines_global[i].name, task_nova)
-      #machines.append(machine_nova)
-    #individual = Individual(machines)
+      #print('socorro')
+      #print(machines_global[i].get('nomeMaquina'))
+      #print(machines_global[i]['nomeMaquina'])
+      #print('nao aguento mais')
+      for j in range(len(task_nova)):
+        tasks_obj = []
+        _name = task_nova[j]['nomeTarefa']
+        _time = task_nova[j]['horasTarefa']
+        _order = task_nova[j]['order']
+        _forcedOrder = task_nova[j]['forcedOrder']
+        if _forcedOrder == 'False':
+          _forcedOrder = 0
+        else:
+          _forcedOrder = 1
+        _nextTask = task_nova[j]['nextTask']
+        task = Task(_name,_time,_order,_forcedOrder,_nextTask)
+        tasks_aux.append(task)
+      #print(tasks_aux)
+      #print('abc')
+      
+      machine_nova = Machine(machines_global[i]['nomeMaquina'], tasks_aux)
+      machines.append(machine_nova)
+    
+    individual = Individual(machines)
+    # for i in range(len(individual._machines)):
+    #   for j in range(len(individual._machines[0]._tasks)):
+    #     print(individual._machines[i]._tasks[j])
 
 
 
