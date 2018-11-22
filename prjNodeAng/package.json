@@ -28,6 +28,7 @@
     "nodemailer": "^4.0.1",
     "passport": "~0.1.17",
     "passport-local": "~0.1.6",
+    "request": "^2.88.0",
     "serve-favicon": "~2.4.2",
     "sweetalert": "^0.4.2"
   }

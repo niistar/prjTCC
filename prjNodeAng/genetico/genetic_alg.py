@@ -10,19 +10,26 @@ import sys
 
 app = Flask (__name__)
 CORS(app)
+machines_global = []
+tasks_global = []
 
-@app.route('/')
-def hello():
-  print('aaa')
-  return 'hello world'
-
-@app.route('/teste', methods=['POST'])
+@app.route('/', methods=['POST'])
 def funcao():
-  #print('This is error output', file=sys.stderr)
-  #print('This is standard output', file=sys.stdout)
+  s=0
   if request.method == 'POST':
     json = request.get_json()
-    return json
+    for i in range(len(json)):
+      if s == 0 and json[i] != '//':
+        machines_global.append(json[i])
+      if s == 0 and json[i] == '//':
+        s = 1
+      if s == 1 and json[i] != '//':
+        tasks_global.append(json[i])
+
+
+    print(machines_global)
+    print('aa')
+    print(tasks_global)
 
   
   #Classes
@@ -77,38 +84,52 @@ def funcao():
 
   #Método de criação de indivíduo
   def population():
-      task1 = Task('T1', 40, 0, 0, 0)
-      task2 = Task('T2', 18, 0, 0, 0)
-      task3 = Task('T3', 31, 2, 1, 0)
-      task4 = Task('T4', 7, 0, 0, 0)
-      task5 = Task('T5', 22, 0, 0, 0)
-      task6 = Task('T6', 4, 0, 0, 0)
-      task7 = Task('T7', 11, 0, 0, 0)
-      task8 = Task('T8', 26, 5, 1, 0)
-      task9 = Task('T9', 50, 0, 0, 0)
-      task10 = Task('T10', 8, 0, 0, 0)
+    machines = []
+    for i in range(len(machines_global)):
+      task_nova = deepcopy(tasks_global)
+      shuffle(task_nova)
+      #print(machines_global[i].name)
+      print('socorro')
+      print(machines_global[i])
+      print('nao aguento mais')
+      #machine_nova = Machine(machines_global[i].name, task_nova)
+      #machines.append(machine_nova)
+    #individual = Individual(machines)
 
 
-      tasks1 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
-      tasks2 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
-      tasks3 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
-      tasks4 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
-      tasks5 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
 
-      shuffle(tasks1)
-      machine1 = Machine('Caldeira', tasks1)
-      shuffle(tasks2)
-      machine2 = Machine('Empacotadora', tasks2)
-      shuffle(tasks3)
-      machine3 = Machine('Prensa', tasks3)
-      shuffle(tasks4)
-      machine4 = Machine('Etiquetadora', tasks4)
-      shuffle(tasks5)
-      machine5 = Machine('Esteira', tasks5)
-      machines = [machine1, machine2, machine3, machine4, machine5]
-      individual = Individual(machines)
+      # task1 = Task('T1', 40, 0, 0, 0)
+      # task2 = Task('T2', 18, 0, 0, 0)
+      # task3 = Task('T3', 31, 2, 1, 0)
+      # task4 = Task('T4', 7, 0, 0, 0)
+      # task5 = Task('T5', 22, 0, 0, 0)
+      # task6 = Task('T6', 4, 0, 0, 0)
+      # task7 = Task('T7', 11, 0, 0, 0)
+      # task8 = Task('T8', 26, 5, 1, 0)
+      # task9 = Task('T9', 50, 0, 0, 0)
+      # task10 = Task('T10', 8, 0, 0, 0)
 
-      return individual
+
+      # tasks1 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
+      # tasks2 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
+      # tasks3 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
+      # tasks4 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
+      # tasks5 = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
+
+      # shuffle(tasks1)
+      # machine1 = Machine('Caldeira', tasks1)
+      # shuffle(tasks2)
+      # machine2 = Machine('Empacotadora', tasks2)
+      # shuffle(tasks3)
+      # machine3 = Machine('Prensa', tasks3)
+      # shuffle(tasks4)
+      # machine4 = Machine('Etiquetadora', tasks4)
+      # shuffle(tasks5)
+      # machine5 = Machine('Esteira', tasks5)
+      # machines = [machine1, machine2, machine3, machine4, machine5]
+      # individual = Individual(machines)
+
+    return individual
 
   #Método de cálculo da aptidão do indivíduo
   def fitness (individual):

@@ -15,16 +15,16 @@ module.exports = function(app, passport) {
 
     
     app.post('/users/escalonar', isLoggedIn, function(req, res, next) {  
-        console.log(req.body);    
-        request.get('http://127.0.0.1:5000/', function(err, res, body){
-            console.log(res);
-        });
+        // console.log(req.body);    
+        // request.get('http://127.0.0.1:5000/', function(err, res, body){
+        //     console.log(res);
+        // });
         
-        // request.post('127.0.0.1:5000/teste', {json: true, body: req.body}, function(err, res, body) {
-        //         console.log('chegou');
-        //         console.log(res);
-        //         console.log(body);
-        //     });
+        request.post('http://127.0.0.1:5000/', {json: true, body: req.body}, function(err, res, body) {
+                console.log('chegou');
+                console.log(res);
+                console.log(body);
+            });
 
         
     }); 
