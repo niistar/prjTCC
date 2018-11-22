@@ -1,16 +1,20 @@
 var mongoose = require('mongoose');
-var User = require('./user.js');
+var Maquina = require('./maquina.js');
+var Tarefa = require('./tarefa.js');
 var bcrypt   = require('bcrypt-nodejs');
 
 
 var escalaSchema = new mongoose.Schema({
         
         //_id: Number,
+        nomeMaquina : String,
         nomeTarefa: String,
         horasTarefa: Number,
         order : Number,
         forcedOrder: Number,
-        nextTask: Number
+        nextTask: Number,
+        turno : Number,
+        usuario : String
         // titulo : String,
         // rua : String,
         // numero : Number,

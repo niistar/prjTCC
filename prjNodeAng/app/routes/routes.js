@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var User = require('../models/user.js');
 var Maquina = require('../models/maquina.js');
 var Tarefa = require ('../models/tarefa.js');
+var Escalonar = require ('../models/escalonar.js');
 var request = require('request');
 
 // app/routes.js
@@ -15,19 +16,63 @@ module.exports = function(app, passport) {
 
     
     app.post('/users/escalonar', isLoggedIn, function(req, res, next) {  
-        // console.log(req.body);    
+
+         var user1 = req.user.nome;
+  
         // request.get('http://127.0.0.1:5000/', function(err, res, body){
         //     console.log(res);
         // });
         
         request.post('http://127.0.0.1:5000/', {json: true, body: req.body}, function(err, res, body) {
-                console.log('chegou');
-                console.log(res);
-                console.log(body);
+                //console.log('chegou');
+                //console.log(body);
+                var i, j;
+                var lista;
+                for(i=0;i<body.length;i++)
+                {
+                    let nomeMaquina = body[i]._name;
+                    let listaTarefas = body[i]._tasks;
+                    console.log(listaTarefas[2]);
+                    console.log(listaTarefas.length);
+                    for(j=0;j<listaTarefas.length;j++)
+                    {
+                        let escalonar = new Escalonar();
+                        var str = JSON.parse(listaTarefas[j]);
+                        escalonar.nomeMaquina = nomeMaquina;
+                        escalonar.nomeTarefa = str._name;
+                        escalonar.horasTarefa = str._time;
+                        escalonar.order = str._order;
+                        escalonar.forcedOrder = str._forcedOrder;
+                        escalonar.nextTask = str._nexttask;
+                        escalonar.turno = j+1;
+                        escalonar.usuario = user1;
+                        escalonar.save(function(err){
+                            if(err) return console.error(err);
+                        });
+
+                        //console.log(escalonar);
+                        //console.log(listaTarefas[j]);
+                        //console.log(listaTarefas[j]._name);
+                        //console.log(listaTarefas[j]._time);
+                    }
+                }
+                
+
             });
 
         
-    }); 
+    });
+    app.get('/users/escalonar', function(req, res, next) {
+        var user = req.user.nome;
+        console.log(user);
+        Escalonar.find({"usuario":user}, function(err, escala){
+            if(err){
+                return res.send();
+            }
+            else
+            res.json(escala);
+            });
+    });
 
     app.get('/template', function(req, res, next) {
         res.render('template.ejs',{

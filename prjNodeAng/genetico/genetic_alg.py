@@ -7,6 +7,7 @@ from copy import copy, deepcopy
 from flask import Flask, request
 from flask_cors import CORS
 import sys
+import json as json_class
 
 app = Flask (__name__)
 CORS(app)
@@ -33,6 +34,12 @@ def funcao():
 
   
   #Classes
+  class Escalonar:
+    def __init__(self, name, tasks):
+      self._name = name
+      self._tasks = tasks
+
+
   class Individual:
     def __init__(self, machines):
       self._machines = machines
@@ -88,14 +95,9 @@ def funcao():
     tasks_obj = []
     tasks_aux = []
     for i in range(len(machines_global)):
-      task_nova = list(deepcopy(tasks_global))
+      task_nova = deepcopy(tasks_global)
       shuffle(task_nova)
-      #print(task_nova)
-      #print(machines_global[i].name)
-      #print('socorro')
-      #print(machines_global[i].get('nomeMaquina'))
-      #print(machines_global[i]['nomeMaquina'])
-      #print('nao aguento mais')
+      tasks_aux = []
       for j in range(len(task_nova)):
         tasks_obj = []
         _name = task_nova[j]['nomeTarefa']
@@ -114,7 +116,7 @@ def funcao():
       
       machine_nova = Machine(machines_global[i]['nomeMaquina'], tasks_aux)
       machines.append(machine_nova)
-    
+
     individual = Individual(machines)
     # for i in range(len(individual._machines)):
     #   for j in range(len(individual._machines[0]._tasks)):
@@ -157,6 +159,10 @@ def funcao():
 
   #Método de cálculo da aptidão do indivíduo
   def fitness (individual):
+    # for i in range(len(individual._machines)):
+    #   for j in range(len(individual._machines[0]._tasks)):
+    #     print(individual._machines[i]._tasks[j])
+    #   print('maquina')
     total = 0
     total2 = 0
     for i in range(len(individual._machines)):
@@ -202,7 +208,7 @@ def funcao():
     new_individuals = []
     menor = 1000000000000
     new_list = []
-    for j in range(1000):
+    for j in range(10):
       new_individual = []
       new_individuals = []
       menor = 1000000000000
@@ -413,13 +419,13 @@ def funcao():
   resposta = []
   s = 0
   #print('chegou')
-  for i in range (1000):
+  for i in range (10):
     x = population()
     individuals.append(x)
 
   while True:
-    for i in range(1000):
-        fitness(individuals[i])
+    for i in range(10):
+      fitness(individuals[i])
     response = max(individuals, key = lambda x: x._fit)
     response2 = min(individuals, key = lambda x: x._fit)
     media = []
@@ -440,28 +446,43 @@ def funcao():
 
     resposta = [mean(media), response._fit, response2._fit]
     pprint(resposta)
-
+    resp_json = []
+    tar_resp = []
     if response._fit == response2._fit:
-      for i in range(len(response._machines[0]._tasks)):
-        print('Maquina 1: ')
-        print(response2._machines[0]._tasks[i])
-        print('\n')
-      for i in range(len(response._machines[0]._tasks)):
-        print('Maquina 2: ')
-        print(response2._machines[1]._tasks[i])
-        print('\n')
-      for i in range(len(response._machines[0]._tasks)):
-        print('Maquina 3: ')
-        print(response2._machines[2]._tasks[i])
-        print('\n')
-      for i in range(len(response._machines[0]._tasks)):
-        print('Maquina 4: ')
-        print(response2._machines[3]._tasks[i])
-        print('\n')
-      for i in range(len(response._machines[0]._tasks)):
-        print('Maquina 5: ')
-        print(response2._machines[4]._tasks[i])
-        print('\n')
+      for i in range(len(response2._machines)):
+        tar_resp = []
+        for j in range(len(response2._machines[i]._tasks)):
+          #tar_resp.append(response2._machines[i]._tasks[j])
+          jsonL = json_class.dumps(response2._machines[i]._tasks[j].__dict__)
+          tar_resp.append(jsonL)
+        index = i + 1
+        
+        resp_json.append(Escalonar(response2._machines[i]._name, tar_resp))
+      json_string = json_class.dumps([ob.__dict__ for ob in resp_json])
+      print(json_string)
+      return json_string
+
+      # for i in range(len(response._machines[0]._tasks)):
+        
+      #   print('Maquina 1: ')
+      #   print(response2._machines[0]._tasks[i])
+      #   print('\n')
+      # for i in range(len(response._machines[0]._tasks)):
+      #   print('Maquina 2: ')
+      #   print(response2._machines[1]._tasks[i])
+      #   print('\n')
+      # for i in range(len(response._machines[0]._tasks)):
+      #   print('Maquina 3: ')
+      #   print(response2._machines[2]._tasks[i])
+      #   print('\n')
+      # for i in range(len(response._machines[0]._tasks)):
+      #   print('Maquina 4: ')
+      #   print(response2._machines[3]._tasks[i])
+      #   print('\n')
+      # for i in range(len(response._machines[0]._tasks)):
+      #   print('Maquina 5: ')
+      #   print(response2._machines[4]._tasks[i])
+      #   print('\n')
       break
 
     # print('media: ' + str(mean(media)))
@@ -475,26 +496,26 @@ def funcao():
   #             print(response._machines[i]._tasks[j])
   #             print('\n')
 
-  for i in range(len(response._machines[0]._tasks)):
-    print('Maquina 1: ')
-    print(response._machines[0]._tasks[i])
-    print('\n')
-  for i in range(len(response._machines[0]._tasks)):
-    print('Maquina 2: ')
-    print(response._machines[1]._tasks[i])
-    print('\n')
-  for i in range(len(response._machines[0]._tasks)):
-    print('Maquina 3: ')
-    print(response._machines[2]._tasks[i])
-    print('\n')
-  for i in range(len(response._machines[0]._tasks)):
-    print('Maquina 4: ')
-    print(response._machines[3]._tasks[i])
-    print('\n')
-  for i in range(len(response._machines[0]._tasks)):
-    print('Maquina 5: ')
-    print(response._machines[4]._tasks[i])
-    print('\n')
+  # for i in range(len(response._machines[0]._tasks)):
+  #   print('Maquina 1: ')
+  #   print(response._machines[0]._tasks[i])
+  #   print('\n')
+  # for i in range(len(response._machines[0]._tasks)):
+  #   print('Maquina 2: ')
+  #   print(response._machines[1]._tasks[i])
+  #   print('\n')
+  # for i in range(len(response._machines[0]._tasks)):
+  #   print('Maquina 3: ')
+  #   print(response._machines[2]._tasks[i])
+  #   print('\n')
+  # for i in range(len(response._machines[0]._tasks)):
+  #   print('Maquina 4: ')
+  #   print(response._machines[3]._tasks[i])
+  #   print('\n')
+  # for i in range(len(response._machines[0]._tasks)):
+  #   print('Maquina 5: ')
+  #   print(response._machines[4]._tasks[i])
+  #   print('\n')
 
-  return 'qqq'
+  return 'flask'
   #voltar o código aqui

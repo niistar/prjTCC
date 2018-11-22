@@ -127,38 +127,32 @@
                </h2>
                <h5 class="center">Escalonamento hoje</h5>
                <div class="divider"></div>
-               <div class="center">
+               <!-- <div class="center"> -->
                   <!-- Dropdown Trigger -->
-                  <a class='dropdown-trigger black-text' href='#' data-target='dropdown1'>Turno 1</a>
-                  <i class="material-icons dropdown-trigger" data-target="dropdown1" style="vertical-align: bottom;font-size: 20px;cursor: pointer;">keyboard_arrow_down</i> 
+                  <!-- <a class='dropdown-trigger black-text' href='#' data-target='dropdown1'>Turno 1</a>
+                  <i class="material-icons dropdown-trigger" data-target="dropdown1" style="vertical-align: bottom;font-size: 20px;cursor: pointer;">keyboard_arrow_down</i>  -->
                   <!-- Dropdown Structure -->
-                  <ul id='dropdown1' class='dropdown-content'>
+                  <!-- <ul id='dropdown1' class='dropdown-content'>
                     <li><a href="#!" class="black-text">Turno 2</a></li>
                     <li class="divider" tabindex="-1"></li>
                     <li><a href="#!" class="black-text">Turno 3</a></li>
                     <li class="divider" tabindex="-1"></li>
                   </ul>
-              </div>
+              </div> -->
                <table class="highlight centered responsive-table">
                   <thead>
                     <tr>
                         <th>Máquina</th>
                         <th>Tarefa</th>
+                        <th>Turno</th>
                     </tr>
                   </thead>
           
                   <tbody>
-                    <tr>
-                      <td>Empacotadora</td>
-                      <td>1</td>
-                    </tr>
-                    <tr>
-                      <td>Cortadora</td>
-                      <td>3</td>
-                    </tr>
-                    <tr>
-                      <td>Caldeira</td>
-                      <td>2</td>
+                    <tr ng-repeat="escala in escalas">
+                      <td>{{escala.nomeMaquina}}</td>
+                      <td>{{escala.nomeTarefa}}</td>
+                      <td>{{escala.turno}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -257,7 +251,10 @@
   var app = angular.module('myApp', ['ui.mask','ngRoute', 'ngResource']);
 
   app.controller('quartoController', ['$scope', '$http', '$window', '$timeout', function ($scope, $http, $window, $timeout) {
-      
+    $http.get('/users/escalonar').then(function (response) {
+            console.log(response.data);
+            $scope.escalas = response.data;  
+      });
   }])
 
 </script>
